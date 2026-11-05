@@ -1,0 +1,1229 @@
+# MASTER IMPLEMENTATION PROMPT — VERICOVE MY HEALTH EXPERIENCE
+
+## ROLE
+
+Act as a senior full-stack engineer, healthcare product architect, AI conversational systems engineer, UI/UX designer, accessibility specialist, and QA engineer.
+
+Your responsibility is to independently design, implement, integrate, and test the complete **My Health** segment of Vericove.
+
+Do not merely provide recommendations, code snippets, mockups, or implementation instructions. Actually inspect the existing repository and implement the feature.
+
+Work autonomously. Make reasonable engineering decisions without repeatedly asking me for clarification.
+
+Do not stop after creating the UI. Complete the frontend, backend integration, database structure, adaptive conversation logic, voice interaction layer, responsive layouts, error handling, and testing.
+
+---
+
+# PHASE 0 — UNDERSTAND THE EXISTING PROJECT
+
+Before modifying anything, inspect the entire existing codebase.
+
+Project location:
+
+`C:\Projects\VeriCore`
+
+The project is an existing Vite-based prototype with React-oriented frontend development and an existing Supabase integration setup.
+
+Known existing elements include:
+
+- `src/lib/supabase.js`
+- `src/core.js`
+- Existing authentication screens and application navigation.
+- An existing Supabase migration:
+  `supabase/migrations/202611040001_initial_research_mvp.sql`
+- Existing profile and research-related database structures.
+
+These are starting points, not assumptions about the current state. Verify everything directly.
+
+### Tasks
+
+1. Inspect `package.json` and identify the exact framework, dependencies, scripts, and versions.
+2. Inspect the complete `src` directory.
+3. Identify the existing routing system.
+4. Identify the global styling system, CSS variables, fonts, icon library, and component conventions.
+5. Inspect the existing dashboard and My Health implementation.
+6. Inspect the Supabase client and environment-variable configuration.
+7. Inspect existing migrations and database tables.
+8. Identify reusable components and existing design tokens.
+9. Identify existing authentication and user-session handling.
+10. Identify existing responsive breakpoints and mobile navigation.
+
+### Strict preservation rules
+
+- Do not replace the existing framework.
+- Do not recreate the application from scratch.
+- Do not overwrite working authentication.
+- Do not break existing dashboard, community, research, or profile sections.
+- Do not duplicate existing components unnecessarily.
+- Do not replace the existing design system without a compelling reason.
+- Do not delete existing migrations or database tables.
+- Do not introduce another UI framework if the existing one is sufficient.
+- Do not hardcode user information.
+- Do not expose API keys or Supabase service-role credentials.
+
+Before implementation, create a concise internal implementation plan and then proceed without waiting for approval.
+
+---
+
+# PHASE 1 — PRODUCT VISION AND EXPERIENCE
+
+Transform the existing My Health section into a premium, personalized health companion experience.
+
+The experience should not feel like a conventional medical administration dashboard.
+
+It should feel like a combination of:
+
+- Apple Health's clarity.
+- A premium personal journal.
+- A thoughtful conversational assistant.
+- A modern healthcare information platform.
+
+The central idea:
+
+"Your health, your space."
+
+The user should be able to:
+
+1. Record symptoms naturally.
+2. Have a personalized conversation with an AI companion.
+3. Answer adaptive questions based on previous answers.
+4. Speak instead of typing.
+5. Review and edit their symptom information.
+6. Maintain a chronological health journal.
+7. View understandable health observations.
+8. Discover relevant medical research.
+9. Explore verified healthcare professionals.
+10. Prepare organized summaries for medical appointments.
+
+The experience must prioritize trust, privacy, accessibility, clarity, and ease of use.
+
+---
+
+# PHASE 2 — REDESIGN THE MY HEALTH INTERFACE
+
+## 2.1 Navigation architecture
+
+Simplify the existing navigation.
+
+Use these primary destinations:
+
+- Overview
+- Journal
+- Insights
+- Records
+
+The Health Companion should be accessible through a prominent primary CTA rather than becoming another complicated navigation layer.
+
+Treat medications, treatments, reports, and documents as relevant subsections or filters rather than adding unnecessary primary navigation items.
+
+Preserve the application's existing global sidebar and navigation conventions.
+
+## 2.2 Overview page
+
+Build a redesigned My Health landing page.
+
+### Section A: Header
+
+Display:
+
+- "Your health, your space."
+- A short supportive subtitle.
+- Search functionality if already supported.
+- Notification and profile controls consistent with the existing application.
+
+Avoid oversized headers that waste vertical space.
+
+### Section B: Health Companion hero card
+
+This should be the most visually prominent component.
+
+Content:
+
+- Mira's visual identity.
+- A short conversational greeting.
+- A brief explanation of what Mira can help with.
+- Primary button: "Start a conversation".
+- Secondary action: "Continue previous session", when applicable.
+
+Example:
+
+"Hey, I'm Mira.
+
+Whenever something feels different, you can talk to me about it. We'll take things one step at a time."
+
+The CTA should open the dedicated conversation experience.
+
+### Section C: Health journal overview
+
+Display compact statistics:
+
+- Recent entries.
+- Saved reports.
+- Health timeline.
+
+Use real database data when available.
+
+Do not invent health statistics or display fabricated personal health information.
+
+### Section D: Recent activity
+
+Show the latest health journal entries.
+
+Each entry should contain:
+
+- Entry title.
+- Date and time.
+- Brief description.
+- Entry category.
+- User-reported severity, if applicable.
+
+Clicking an entry should open its detailed view.
+
+### Section E: Health resources
+
+Provide compact entry points to:
+
+- Find healthcare professionals.
+- Explore medical research.
+- View saved documents.
+
+### Layout requirements
+
+Desktop:
+- Two-column layout where appropriate.
+- Main content takes approximately 65–70% of available width.
+- Secondary information takes the remaining space.
+- Generous whitespace.
+
+Tablet:
+- Reduce the sidebar width.
+- Collapse secondary content where necessary.
+- Preserve comfortable touch targets.
+
+Mobile:
+- Single-column layout.
+- Prominent companion CTA.
+- Compact statistics.
+- Journal entries stacked vertically.
+- Bottom navigation or an appropriate mobile navigation pattern.
+- No horizontal overflow.
+
+---
+
+# PHASE 3 — CREATE MIRA, THE HEALTH COMPANION
+
+Mira is Vericove's conversational health companion.
+
+She must have a consistent personality and communication style.
+
+## 3.1 Personality definition
+
+Mira should be:
+
+- Empathetic.
+- Patient.
+- Curious.
+- Calm.
+- Non-judgmental.
+- Informative.
+- Conversational.
+- Medically responsible.
+
+Avoid robotic phrases such as:
+
+"Please enter your symptom information."
+
+Prefer:
+
+"Can you tell me a little more about what you've been experiencing?"
+
+Avoid excessive enthusiasm, emojis, exaggerated reassurance, or artificial emotional language.
+
+Mira must never:
+
+- Claim to be a human doctor.
+- Claim to diagnose diseases.
+- Guarantee that something is harmless.
+- Dismiss symptoms.
+- Present speculation as established medical fact.
+- Pressure the user into answering sensitive questions.
+
+Mira should explicitly identify herself as an AI health companion.
+
+## 3.2 Visual identity
+
+Create a recognizable, minimal visual identity for Mira.
+
+Preferred direction:
+
+- Abstract flower-like character.
+- Soft lavender and muted plum tones.
+- Subtle animated breathing.
+- Gentle reactions to voice activity.
+- Minimal visual complexity.
+
+Do not use generic robot illustrations.
+
+Do not make the character visually childish or overly cartoonish.
+
+If an existing mascot asset is available, reuse it. Otherwise, create a reusable visual component using available project assets, CSS, or lightweight SVG.
+
+Avoid adding heavy animation libraries solely for the mascot.
+
+## 3.3 Conversation interface
+
+Create a dedicated conversation screen.
+
+The layout should contain:
+
+1. Mira's identity and availability.
+2. A conversational message area.
+3. One active question at a time.
+4. Contextual suggested answers.
+5. A free-text response input.
+6. A microphone control.
+7. A text/voice mode switch.
+8. A clear exit or pause action.
+9. Access to previous answers.
+10. A visible privacy indicator.
+
+The interface should not resemble a generic messaging application.
+
+Use a guided conversational canvas with generous spacing and readable typography.
+
+### Conversation behaviour
+
+- Display one question at a time.
+- Preserve the conversation history.
+- Use smooth transitions between questions.
+- Allow users to edit previous answers.
+- Allow users to skip optional questions.
+- Allow users to pause and resume sessions.
+- Allow users to finish early.
+- Never lose unsaved answers on accidental navigation.
+- Display loading and processing states.
+- Handle network interruptions gracefully.
+
+Do not display a fixed question count.
+
+Use contextual status labels such as:
+
+"Understanding your experience..."
+
+"Putting the details together..."
+
+"Reviewing your responses..."
+
+---
+
+# PHASE 4 — BUILD THE ADAPTIVE QUESTION ENGINE
+
+This is the most important functional requirement.
+
+The question engine must be dynamic.
+
+Do not create a static questionnaire containing a predetermined number of questions.
+
+The AI should select the next relevant question using the user's existing answers and the information still required.
+
+## 4.1 Conversation workflow
+
+Implement the following logical stages:
+
+### Stage 1: Understand the concern
+
+Ask the user what they are experiencing.
+
+Allow natural language responses.
+
+Examples:
+
+- "I've been feeling unusually tired."
+- "I've noticed discomfort in my lower abdomen."
+- "I've been experiencing headaches."
+- "My sleep pattern has changed."
+
+Do not force users to choose from a predefined symptom catalogue.
+
+### Stage 2: Understand the experience
+
+Based on the primary concern, identify relevant information such as:
+
+- Location.
+- Onset.
+- Duration.
+- Frequency.
+- Sensation or nature of the symptom.
+- User-reported severity.
+- Changes over time.
+
+Ask only questions that are relevant.
+
+### Stage 3: Understand the context
+
+Depending on the symptom, ask about relevant context.
+
+Possible topics:
+
+- Previous occurrences.
+- Existing health conditions.
+- Relevant medications.
+- Previous medical consultations.
+- Relevant personal health history.
+
+Ask sensitive questions only when clinically relevant.
+
+Explain why sensitive information is needed.
+
+Do not collect unnecessary personal information.
+
+### Stage 4: Explore associated symptoms
+
+Identify relevant associated symptoms based on the user's responses.
+
+The engine must:
+
+- Avoid repeating questions.
+- Avoid asking irrelevant questions.
+- Adapt follow-ups to new information.
+- Recognize contradictory answers.
+- Ask for clarification when necessary.
+
+### Stage 5: Review and complete
+
+Determine whether enough information has been collected.
+
+If the information is sufficient, generate a structured summary.
+
+If more relevant information is needed, continue asking questions.
+
+If an urgent safety concern is detected, prioritize appropriate professional-care guidance instead of continuing routine questioning.
+
+## 4.2 Dynamic stopping condition
+
+Do not use a fixed question count.
+
+Implement a structured completion evaluation.
+
+A session may end when:
+
+- Relevant required fields have been collected.
+- The user explicitly chooses to finish.
+- The user chooses to pause.
+- A safety condition requires escalation.
+- Further questioning is unlikely to improve the summary.
+
+Never prolong the conversation simply to collect more information.
+
+## 4.3 Structured conversation state
+
+Maintain a structured session state.
+
+Example:
+
+{
+  "sessionId": "session-id",
+  "primaryConcern": "pelvic discomfort",
+  "collectedInformation": {
+    "location": "lower abdomen",
+    "onset": "three days ago",
+    "frequency": "intermittent",
+    "severity": null,
+    "associatedSymptoms": []
+  },
+  "missingInformation": [
+    "severity",
+    "associatedSymptoms"
+  ],
+  "safetyStatus": "not_assessed",
+  "nextQuestion": null,
+  "sessionStatus": "active"
+}
+
+This is an illustrative schema. Design the actual schema according to the application.
+
+## 4.4 AI orchestration
+
+Do not let an unrestricted LLM independently invent medical interview procedures.
+
+Use a controlled orchestration architecture:
+
+1. Receive the user's answer.
+2. Validate and normalize the response.
+3. Update structured session information.
+4. Evaluate relevant missing information.
+5. Run clinician-reviewed safety checks.
+6. Select an appropriate next question from a structured question framework.
+7. Generate conversational wording using the LLM.
+8. Validate the generated response.
+9. Return the question and available answer options.
+10. Persist the session state.
+
+The LLM should control natural conversational phrasing, not independently define clinical safety rules.
+
+Use structured JSON responses with schema validation.
+
+Handle malformed AI responses and provider failures without losing user data.
+
+## 4.5 Example conversation branches
+
+Create test scenarios for at least:
+
+- Fatigue.
+- Headaches.
+- Pelvic discomfort.
+- Menstrual irregularities.
+- Sleep disturbances.
+- Digestive discomfort.
+
+These are testing scenarios, not diagnostic pathways.
+
+Each scenario should demonstrate how answers change the next question.
+
+Include an unknown-symptom fallback that supports natural language rather than forcing users into existing categories.
+
+## 4.6 Medical safety
+
+Build a clinician-reviewed safety framework.
+
+It must:
+
+- Check urgent warning signs early.
+- Avoid delaying urgent-care recommendations.
+- Never diagnose a condition.
+- Avoid unsupported treatment recommendations.
+- Avoid medication dosage recommendations.
+- Distinguish user-reported information from AI interpretations.
+- Clearly communicate uncertainty.
+- Recommend appropriate professional evaluation when warranted.
+
+Do not invent clinical thresholds or emergency protocols.
+
+Use trusted, reviewed medical guidance for any safety rules implemented.
+
+If clinical rules have not yet been validated, clearly mark them as unavailable for clinical use rather than presenting them as reliable.
+
+---
+
+# PHASE 5 — VOICE ASSISTANCE
+
+Voice should be an integrated feature, not a separate experimental page.
+
+Implement three capabilities.
+
+## 5.1 Speech-to-text
+
+Allow users to speak their answers.
+
+Requirements:
+
+- Microphone permission handling.
+- Recording indicator.
+- Live transcription when supported.
+- Stop and resume controls.
+- Editable transcription before submission.
+- Graceful fallback if browser speech recognition is unavailable.
+- Clear error messages if microphone access is denied.
+
+Do not submit an answer automatically when transcription is incomplete.
+
+## 5.2 Text-to-speech
+
+Allow Mira's questions and responses to be spoken aloud.
+
+Requirements:
+
+- Play and pause.
+- Stop playback.
+- Speech speed control.
+- Voice selection where supported.
+- Mute option.
+- No automatic playback without appropriate user consent.
+
+Use the existing browser speech synthesis API as a starting implementation if suitable.
+
+Abstract speech functionality into reusable services so another provider can be integrated later.
+
+## 5.3 Voice conversation mode
+
+Build a dedicated voice interaction state.
+
+Possible states:
+
+- idle
+- listening
+- processing
+- speaking
+- paused
+- error
+
+Use a minimal animated waveform or orb.
+
+Mira's visual component should react appropriately to these states.
+
+Provide controls for:
+
+- Start listening.
+- Stop listening.
+- Interrupt playback.
+- Switch to typing.
+- Exit voice mode.
+
+Avoid implementing a fake real-time voice interface.
+
+If continuous real-time conversation requires a paid provider or API credentials that are not configured, implement the modular voice interface and functional supported browser-based fallback.
+
+Never expose provider API keys in frontend code.
+
+---
+
+# PHASE 6 — POST-CONVERSATION SUMMARY
+
+When a session is completed, generate an editable health summary.
+
+The summary must separate facts from interpretations.
+
+## Section A: Your reported experience
+
+Include:
+
+- Primary concern.
+- Location.
+- Onset.
+- Duration.
+- Frequency.
+- User-reported severity.
+- Associated symptoms.
+- Relevant context.
+
+Only display information that was actually provided.
+
+## Section B: AI observations
+
+Show carefully qualified observations, such as:
+
+- Symptoms reported together.
+- Changes in frequency.
+- Repeated observations.
+- Possible patterns worth discussing with a clinician.
+
+Clearly identify these as AI-generated observations, not medical conclusions.
+
+Never turn a correlation into a diagnosis or causal statement.
+
+## Section C: Next steps
+
+Offer appropriate actions:
+
+- Save to journal.
+- Edit the summary.
+- Prepare an appointment summary.
+- Explore educational resources.
+- Continue tracking.
+- Seek professional care where appropriate.
+
+Do not automatically prescribe treatment.
+
+## Section D: Medical resources
+
+Provide separate areas for:
+
+- Healthcare professionals.
+- Published research.
+- Educational material.
+
+Do not fabricate doctors, credentials, medical studies, or research citations.
+
+Use verifiable external sources and clearly display source information.
+
+Recommendations must be relevant and evidence-based.
+
+## PDF/export
+
+Implement an appointment-ready summary export if feasible using existing project dependencies.
+
+The exported document must contain only information approved by the user.
+
+---
+
+# PHASE 7 — HEALTH JOURNAL
+
+Implement a functional health journal.
+
+Features:
+
+- Chronological timeline.
+- Search.
+- Category filters.
+- Symptom entries.
+- Medication entries.
+- Personal notes.
+- Treatment records.
+- Detailed entry view.
+- Edit and delete.
+- Date filtering.
+
+Every entry should have a clear origin:
+
+- Manually entered.
+- Generated from a completed Mira session.
+- Imported document, if supported.
+
+Allow users to distinguish their own statements from AI-generated information.
+
+Do not fabricate sample records in production.
+
+If demonstration data is required, make it clearly identifiable as fictional demo data and keep it separate from real user records.
+
+---
+
+# PHASE 8 — INSIGHTS
+
+Create a dedicated Insights page.
+
+Potential components:
+
+- Symptom frequency over time.
+- Timeline of reported concerns.
+- Repeated observations.
+- Changes in user-reported severity.
+- Relevant educational resources.
+- Saved AI summaries.
+
+Use charts only where actual data supports them.
+
+Empty states should be helpful and encourage the user to record observations.
+
+Do not generate health trends from insufficient data.
+
+Never imply that a chart establishes a diagnosis.
+
+---
+
+# PHASE 9 — RECORDS AND DOCUMENTS
+
+Create a clean records section.
+
+Support:
+
+- Medical documents.
+- Uploaded reports.
+- Saved appointment summaries.
+- Relevant treatment documents.
+- Document categories.
+- Upload dates.
+- File previews where supported.
+- Delete and download actions.
+
+Use Supabase Storage with private buckets and signed access.
+
+Validate file type and size.
+
+Do not expose public URLs for private health documents.
+
+---
+
+# PHASE 10 — SUPABASE AND DATABASE INTEGRATION
+
+Use the existing Supabase project and existing client.
+
+Do not create a second Supabase project or replace existing configuration.
+
+Inspect the current schema before creating migrations.
+
+Create new migrations for health-specific entities.
+
+Potential tables:
+
+1. health_sessions
+2. health_messages
+3. symptom_entries
+4. symptom_observations
+5. health_summaries
+6. health_insights
+7. health_documents
+8. health_recommendations
+
+Adapt names and relationships to existing conventions.
+
+## Database requirements
+
+- Proper primary and foreign keys.
+- Appropriate indexes.
+- Created and updated timestamps.
+- User ownership.
+- Referential integrity.
+- Appropriate constraints.
+- Session status.
+- Structured JSON fields only where justified.
+
+## Security requirements
+
+Enable Row Level Security on all private health tables.
+
+A user must only be able to access their own health records.
+
+Implement policies for:
+
+- SELECT.
+- INSERT.
+- UPDATE.
+- DELETE.
+
+Ensure storage policies also enforce ownership.
+
+Do not assume that hiding frontend controls provides security.
+
+Never use a Supabase service-role key in browser code.
+
+Do not expose health information through public database policies.
+
+Use the existing authentication system.
+
+If authentication is currently simulated, do not silently pretend that health records are securely protected. Implement against the existing auth architecture and clearly identify any missing authentication dependency.
+
+## Migration safety
+
+- Do not delete existing migrations.
+- Do not rewrite the existing research schema.
+- Do not execute destructive SQL.
+- Do not run `supabase db push` or apply migrations to a remote database without explicit authorization.
+- Create migration files locally and validate their SQL.
+- Document the exact commands required for deployment.
+
+---
+
+# PHASE 11 — BACKEND AND AI PROVIDER ARCHITECTURE
+
+Preserve the existing frontend architecture.
+
+Use a modular backend approach.
+
+If the existing project already has a backend, extend it.
+
+Otherwise, implement a clearly separated API layer for health functionality.
+
+For AI functionality, keep provider integrations behind an abstraction.
+
+Suggested modules:
+
+- conversationService
+- questionEngine
+- conversationStateManager
+- healthSafetyService
+- symptomNormalizationService
+- summaryService
+- researchRetrievalService
+- speechRecognitionService
+- speechSynthesisService
+- healthJournalService
+
+Use environment variables for all external API credentials.
+
+If the existing architecture uses a separate Python/FastAPI AI service, integrate through that service rather than duplicating AI orchestration in React.
+
+If no AI provider credentials are configured:
+
+- Build the complete integration interface.
+- Implement deterministic local development fixtures.
+- Make the conversation UI functional in demo mode.
+- Clearly label demo-generated responses.
+- Never present simulated medical analysis as real AI analysis.
+- Never block the rest of the feature because an API key is missing.
+
+Do not invent provider API endpoints or credentials.
+
+---
+
+# PHASE 12 — RESPONSIVE DESIGN FOR ALL DEVICES
+
+This is a mandatory requirement.
+
+Do not design only for a desktop screenshot.
+
+The entire experience must be responsive and usable across:
+
+- 1440px desktop.
+- 1280px laptop.
+- 1024px tablet landscape.
+- 768px tablet portrait.
+- 430px mobile.
+- 390px mobile.
+- 360px small mobile.
+
+Use responsive CSS, flexible layouts, and appropriate breakpoints.
+
+## Desktop
+
+- Preserve the existing sidebar.
+- Use a spacious content layout.
+- Use two-column sections where useful.
+- Keep the conversation centered with a comfortable maximum width.
+- Avoid excessive empty space.
+
+## Tablet
+
+- Collapse or reduce the sidebar.
+- Reflow cards.
+- Preserve readable typography.
+- Ensure all interactive controls remain accessible.
+
+## Mobile
+
+- Use a single-column layout.
+- Convert the sidebar into a mobile-friendly navigation pattern.
+- Keep the main CTA easily accessible.
+- Use full-width conversation cards.
+- Keep the response input accessible above the keyboard.
+- Prevent the keyboard from covering the active input.
+- Use appropriately sized touch targets.
+- Avoid tiny buttons and dense toolbars.
+- Ensure charts and tables adapt to narrow screens.
+- Ensure the Mira character does not occupy excessive screen space.
+
+## Technical responsiveness
+
+- Avoid fixed widths that break layouts.
+- Avoid absolute positioning for primary layout structures.
+- Use CSS Grid and Flexbox appropriately.
+- Use `min-width: 0` where necessary.
+- Handle long text and overflowing content.
+- Test portrait and landscape orientations.
+- Avoid layout shifts during loading.
+- Respect reduced-motion preferences.
+
+Do not merely shrink desktop elements to fit mobile. Reorganize the experience according to the available screen space.
+
+---
+
+# PHASE 13 — DESIGN SYSTEM AND VISUAL QUALITY
+
+Use this visual direction:
+
+**Soft Clinical Minimalism × Warm Editorial Design**
+
+The interface should feel premium, trustworthy, minimal, warm, and calm.
+
+## Colour palette
+
+Use the following design tokens, adjusting only when necessary for accessibility:
+
+- Warm Ivory: #FAF8F7
+- White: #FFFFFF
+- Muted Plum: #694F78
+- Dusty Lilac: #E9DCE8
+- Soft Blush: #F4E7E2
+- Charcoal: #39343D
+
+## Typography
+
+Preferred:
+
+- Instrument Serif or DM Serif Display for selected editorial headings.
+- Inter or Geist for body text and interface elements.
+
+Reuse already installed fonts where possible.
+
+Do not load unnecessary font libraries.
+
+## Components
+
+Use:
+
+- 16–22px card radii.
+- Subtle 1px borders.
+- Minimal shadows.
+- Consistent icon strokes.
+- Clear typographic hierarchy.
+- Comfortable spacing.
+- Subtle hover and focus states.
+
+Avoid:
+
+- Excessive gradients.
+- Excessive glassmorphism.
+- Oversized decorative illustrations.
+- Random accent colours.
+- Too many pills and badges.
+- Unnecessary animations.
+- Excessive card nesting.
+
+## Animation
+
+Use subtle transitions around 180–300ms where appropriate.
+
+Animate:
+
+- Navigation transitions.
+- Question changes.
+- Expanding panels.
+- Voice waveform.
+- Mira's breathing state.
+- Loading and success feedback.
+
+Respect `prefers-reduced-motion`.
+
+Use existing animation dependencies if available.
+
+---
+
+# PHASE 14 — ACCESSIBILITY AND PRIVACY
+
+Accessibility is part of the implementation, not an optional enhancement.
+
+Implement:
+
+- Keyboard navigation.
+- Visible focus indicators.
+- Semantic HTML.
+- Accessible labels.
+- Screen-reader-friendly controls.
+- Appropriate colour contrast.
+- Reduced-motion support.
+- Clear error messages.
+- Touch-friendly controls.
+
+Privacy requirements:
+
+- Explain how health information is used.
+- Obtain consent before optional voice recording or external AI processing.
+- Provide the ability to delete health sessions and associated records.
+- Avoid logging sensitive health messages in application logs.
+- Avoid sending health information to analytics platforms.
+- Do not store raw voice recordings by default.
+- Keep uploaded health documents private.
+- Use secure transport.
+- Ensure users can review and correct their records.
+
+The application must not claim compliance with a healthcare regulation unless the necessary technical, organizational, and legal requirements have actually been met.
+
+---
+
+# PHASE 15 — TESTING AND ERROR HANDLING
+
+Do not consider the implementation complete merely because the website renders.
+
+Test the actual functionality.
+
+## Functional tests
+
+Verify:
+
+1. My Health overview loads.
+2. Navigation works.
+3. Mira conversation opens.
+4. User can submit text responses.
+5. Suggested answer buttons work.
+6. Questions adapt to previous answers.
+7. Previously answered questions are not unnecessarily repeated.
+8. Sessions can be paused and resumed.
+9. Sessions can be completed.
+10. Summary generation works.
+11. Summary editing works.
+12. Journal entries save correctly.
+13. Journal entries can be edited and deleted.
+14. Search and filters work.
+15. Insights display appropriate empty states.
+16. Voice input handles supported and unsupported browsers.
+17. Text-to-speech works where supported.
+18. Microphone denial is handled correctly.
+19. Network errors do not destroy session state.
+20. User data remains isolated.
+
+## Responsive tests
+
+Test all viewport sizes specified in Phase 12.
+
+Verify:
+
+- No horizontal overflow.
+- No overlapping components.
+- No hidden controls.
+- No inaccessible modals.
+- No keyboard obstruction.
+- No unreadable text.
+- No broken navigation.
+
+## Security tests
+
+Verify:
+
+- Users cannot access another user's health records.
+- Unauthorized requests are rejected.
+- Storage policies enforce ownership.
+- Sensitive environment variables are not exposed.
+- User-controlled content is safely rendered.
+- API errors do not leak sensitive information.
+
+Use the existing testing framework if available.
+
+Add missing tests using the smallest appropriate dependency set.
+
+---
+
+# PHASE 16 — IMPLEMENTATION WORKFLOW
+
+Execute the work in this order:
+
+1. Inspect the repository and document existing architecture.
+2. Identify reusable components and dependencies.
+3. Establish the new My Health component structure.
+4. Implement the design system and responsive layout.
+5. Build the overview page.
+6. Build the Mira conversational interface.
+7. Implement the adaptive question engine.
+8. Implement conversation persistence.
+9. Implement the health summary.
+10. Implement the journal.
+11. Implement insights.
+12. Implement records and document handling.
+13. Implement speech-to-text.
+14. Implement text-to-speech.
+15. Integrate Supabase and create health migrations.
+16. Integrate the AI provider abstraction.
+17. Implement security and privacy controls.
+18. Run linting, type checking, builds, and tests.
+19. Fix all implementation errors.
+20. Perform responsive and functional verification.
+21. Provide a final implementation report.
+
+Do not leave major features as static placeholders when they can reasonably be implemented.
+
+Do not create duplicate components or unnecessary dependencies.
+
+Keep code modular, typed where the existing project supports TypeScript, and maintainable.
+
+Do not suppress errors simply to make builds pass.
+
+---
+
+# PHASE 17 — DEFINITION OF DONE
+
+The task is complete only when all applicable requirements below are satisfied.
+
+### Interface
+
+- My Health has a redesigned overview.
+- Navigation is simplified.
+- Mira has a recognizable identity.
+- Conversation UI is fully functional.
+- Interface adapts to desktop, tablet and mobile.
+- Empty, loading, error and success states exist.
+
+### Intelligence
+
+- Questions adapt to user answers.
+- Question count is dynamic.
+- Structured session state is maintained.
+- Duplicate questions are avoided.
+- Safety checks have priority.
+- A final editable summary is generated.
+
+### Voice
+
+- Speech-to-text works where supported.
+- Text-to-speech works where supported.
+- Voice mode has proper states and controls.
+- Unsupported browsers have a fallback.
+
+### Data
+
+- Journal entries persist.
+- Sessions persist.
+- Summaries persist.
+- Records are user-specific.
+- RLS and storage policies are implemented.
+- Existing application data remains intact.
+
+### Quality
+
+- No broken existing routes.
+- No critical console errors.
+- No failing required builds.
+- No broken responsive layouts.
+- No exposed secrets.
+- No fabricated medical recommendations.
+
+---
+
+# FINAL EXECUTION INSTRUCTIONS
+
+You have permission to make ordinary implementation decisions independently.
+
+Do not ask me to approve every component, file, design decision, dependency, or small architectural change.
+
+Do not stop after producing a plan.
+
+Do not repeatedly ask me what to implement next.
+
+Inspect, implement, test, debug, and complete the work autonomously.
+
+If something is missing:
+
+- Inspect the existing project first.
+- Use existing functionality wherever possible.
+- Choose a reasonable implementation.
+- Create a development fallback when external credentials are unavailable.
+- Clearly distinguish functional demo behavior from real production functionality.
+
+Do not bypass security confirmations, expose credentials, apply destructive database changes, or perform irreversible external actions without authorization.
+
+Do not claim something works unless you have actually verified it.
+
+## FINAL REPORT
+
+When finished, provide a concise but complete report containing:
+
+1. What was implemented.
+2. Files created.
+3. Files modified.
+4. Database migrations created.
+5. AI and voice integrations completed.
+6. Features that work in demo mode.
+7. Features requiring external API credentials.
+8. Commands required to run the project.
+9. Commands required to apply database migrations.
+10. Tests executed and their results.
+11. Any remaining blockers.
+
+**Your objective is to deliver a cohesive, production-oriented My Health experience inside the existing Vericove application — not another isolated UI prototype.**
+
+Start by inspecting the repository, then execute the implementation.
+
+---
+
+# CORRECTION ADDENDUM — MIRA MCQ CONVERSATION AND VOICE
+
+This addendum refines and supersedes any conflicting Mira conversation requirements above. Preserve the rest of this master prompt.
+
+## Conversation interaction
+
+- The primary interview must be a guided multiple-choice conversation, not a chatbot with a large default text composer.
+- Present one natural-language question at a time with selectable answer cards and a clear Continue action. Show the selection state and allow the user to change it before continuing.
+- Include “I’m not sure” and “Not applicable” only where appropriate; provide “I’d rather not say” for sensitive questions.
+- Add a quiet “Something else? Add a few words” alternative that reveals a small contextual field only when chosen. Voice input may populate this field, but the user must be able to edit the transcript before submitting.
+- Do not make free text the primary response mechanism, force users to type, or automatically submit a partial transcription.
+
+## Adaptive question engine
+
+- Represent each question as validated structured data: unique ID, clinical information category, conversational wording, selectable options, answer-to-state mapping, relevant follow-up categories, and completion relevance.
+- Select the next useful question from the concern category, selected answers, missing relevant information, and resolved/unknown/not-applicable answers. Do not walk through a fixed questionnaire list.
+- Prevent unnecessary repeats. Skip questions that no longer add useful information, such as impact follow-up after the user says the experience has stopped.
+- Preserve all answers in a structured session. Let the user edit earlier selections without restarting, and keep the summary synchronized.
+- When enough useful information has been gathered, show a summary and offer both “Continue with Mira” and “I’m satisfied.” Continue opens a refinement question without discarding prior answers. Support repeated refinement until the user is satisfied, without an artificial round limit.
+- Validate every displayed question and option set. If AI is later connected, reject malformed output and use a validated deterministic fallback. Never render model HTML.
+- The current project has no AI provider configured. Do not label deterministic demo prompts as live AI analysis.
+
+## Voice identity and behavior
+
+- Mira’s intended voice is calm, warm, feminine, mature, conversational and clear, with a neutral accent in the user’s selected language where available. Avoid robotic, childlike, high-energy or exaggerated delivery.
+- Use a configured neural voice only through a supported provider and server-held credentials. Never invent endpoints or voice identifiers, expose provider keys in the browser, or claim browser speech has neural quality.
+- Without a configured provider, choose the best language-matched device speech voice available, prefer a suitable feminine voice when the browser exposes one, and clearly label it as a device fallback. Allow voice selection where supported.
+- Provide replay, pause, stop, mute/on-off, and speech-speed controls. Keep question speech and visible text aligned. Do not read answer options automatically, autoplay without consent, or speak over the user’s response.
+- If speech recognition is unavailable or denied, preserve the card-based flow and offer the optional text alternative with a clear status.
+
+## Summary and safety
+
+- Keep the transition loop available: question → selected answer → adaptive question → reviewed summary → optional refinement → updated summary.
+- Separate reported answers from AI-generated interpretation. Never store an unreviewed interpretation as a confirmed medical fact.
+- If clinician-reviewed safety guidance is not configured, state that it is unavailable for clinical use. Do not invent emergency thresholds or rules.

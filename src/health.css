@@ -1,0 +1,88 @@
+.health-modal{overscroll-behavior:contain}
+
+/* Mira's guided answer surface */
+.conversation-top{min-height:62px;gap:16px;align-items:center;padding-bottom:14px}
+.conversation-identity{display:flex;align-items:center;gap:12px;min-width:0}
+.conversation-identity>div{min-width:0}
+.conversation-identity strong{display:block;font:700 14px Manrope,sans-serif;color:#332d36}
+.conversation-identity small{display:block;font-size:12px;line-height:1.4;color:#706a73;margin-top:3px}
+.mira-avatar-small{position:relative;display:grid;place-items:center;width:42px;height:42px;overflow:hidden;flex:none;border:1px solid #e9e1eb;border-radius:50%;background:#f5f1f6}
+.mira-avatar-small .mira-flower{position:absolute;left:50%;top:50%;width:78px;height:78px;margin:0;transform:translate(-50%,-50%) scale(.44);transform-origin:center}
+.mira-question{max-width:740px;margin:22px auto 8px}
+.mira-question>span{display:block;font-size:11px;letter-spacing:1.35px;color:#886990}
+.mira-question h2{font-size:clamp(28px,3vw,32px);line-height:1.2;letter-spacing:-.7px;margin:8px 0 9px;text-wrap:balance}
+.mira-question>p{font-size:15px;line-height:1.55;color:#625e66;margin:0 0 18px}
+.mira-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0 13px}
+.mira-option{display:flex;align-items:center;min-width:0;min-height:58px;padding:13px 16px;border:1px solid #e0dce2;border-radius:10px;background:#fff;color:#39343d;text-align:left;font-size:16px;font-weight:500;line-height:1.4;transition:border-color .16s,background-color .16s,color .16s,box-shadow .16s}
+.mira-option:hover{border-color:#b8a4c0;background:#fcfafd}
+.mira-option.selected{border-color:#806588;background:#f2edf3;color:#60496a;font-weight:650;box-shadow:inset 0 0 0 1px #806588}
+.mira-option:focus-visible{outline:3px solid #c6afd0;outline-offset:2px}
+.mira-response-tools{margin-top:10px;padding:8px 12px;border:1px solid #ece6ee;border-radius:10px;background:#faf8fb}
+.mira-other-tools{display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap}
+.mira-other-tools .text-link{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:3px 2px;border:0;background:transparent;color:#674f70;font-size:14px;font-weight:600;text-align:left}
+.mira-other-tools .text-link:hover{color:#503a59;text-decoration:underline;text-underline-offset:3px}
+.mira-other-tools .text-link svg{flex:none}
+.mira-other-field{margin:6px 0 3px;padding:12px 2px 2px;border-top:1px solid #ebe5ec}
+.mira-other-field[hidden]{display:none!important}
+.mira-other-field label{display:block;margin:0 0 6px;font-size:13px;font-weight:700;color:#514a55}
+.mira-other-field .optional{font-size:12px;font-weight:400;color:#77717a}
+.mira-other-field input{width:100%;height:44px;padding:0 12px;border:1px solid #dcd5df;border-radius:8px;background:#fff;color:#332d36;font-size:15px}
+.mira-other-field small{display:block;margin-top:6px;color:#716b75;font-size:12px}
+.mira-control-groups{display:grid;gap:13px;margin-top:14px}
+.mira-playback-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mira-icon-control{display:grid;place-items:center;width:40px;height:40px;flex:none;border:1px solid #ded8e1;border-radius:9px;background:#fff;color:#695573;transition:background-color .15s,border-color .15s,color .15s}
+.mira-icon-control:hover{border-color:#bba9c2;background:#f8f5f9;color:#513d5b}
+.mira-icon-control:focus-visible,.mira-other-tools .text-link:focus-visible,.mira-finish:focus-visible{outline:3px solid #c6afd0;outline-offset:2px}
+.speech-setting{display:flex!important;align-items:center;gap:7px!important;min-width:0;margin:0!important;color:#55505a!important;font-size:13px!important;font-weight:600}
+.speech-setting select{height:40px;min-width:0;max-width:190px;padding:0 10px;border:1px solid #ded8e1;border-radius:8px;background:#fff;color:#39343d;font-size:13px}
+.speech-setting:last-of-type select{max-width:128px}
+.mira-navigation{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding-top:2px}
+.mira-finish{min-height:42px;padding:0 12px;border:0;border-radius:8px;background:transparent;color:#625c67;font-size:14px;font-weight:600}
+.mira-finish:hover{background:#f5f2f6;color:#503d59}
+.mira-navigation .mira-continue{min-width:132px;min-height:46px;padding-inline:18px;font-size:14px}
+.mira-navigation .mira-continue:disabled{opacity:.48;cursor:not-allowed;transform:none}
+.voice-status{min-height:18px;margin:8px 0 0;color:#68636d;font-size:12px;line-height:1.45}
+.mira-answer{overflow-wrap:anywhere}
+.summary-intro{margin:0 0 18px;color:#625e66;line-height:1.55}
+.summary-group{margin:16px 0;padding:15px 17px;border:1px solid #ece6ee;border-radius:10px;background:#fff}
+.summary-group h3{margin:0 0 10px;color:#514a55;font-size:14px;font-weight:700}
+.summary-group .summary-row{padding:10px 0;border-top:1px solid #f0edf1}
+.summary-group .summary-row:first-of-type{border-top:0}
+.summary-row strong{font-size:13px;color:#706a73}
+.summary-row p,.summary-group>p{margin:4px 0 0;color:#332d36;line-height:1.5;overflow-wrap:anywhere}
+.summary-open{background:#faf8fb}
+.summary-ai-status{margin:18px 0;padding:16px 18px;border-left:3px solid #a995af;border-radius:0 9px 9px 0;background:#f7f4f8}
+.summary-ai-status strong{display:block;color:#514258;font-size:14px}
+.summary-ai-status p{margin:6px 0 0;color:#625e66;font-size:13px;line-height:1.55}
+.health-review .health-disclaimer{font-size:13px;line-height:1.55}
+
+@media(max-width:700px){
+  .conversation-top{min-height:56px;gap:10px;padding-bottom:12px}
+  .conversation-identity{gap:9px}
+  .mira-avatar-small{width:38px;height:38px}
+  .mira-question{margin-top:18px}
+  .mira-question h2{font-size:clamp(24px,7vw,29px);line-height:1.24}
+  .mira-question>p{font-size:15px;margin-bottom:15px}
+  .mira-options{grid-template-columns:1fr;gap:8px;margin-top:12px}
+  .mira-option{min-height:54px;padding:12px 14px;font-size:16px}
+  .mira-response-tools{padding:6px 10px}
+  .mira-other-tools{gap:4px 13px}
+  .mira-other-tools .text-link{font-size:14px;min-height:42px}
+  .mira-control-groups{gap:10px;margin-top:11px}
+  .mira-playback-group{display:grid;grid-template-columns:repeat(3,40px) minmax(80px,1fr) minmax(70px,.9fr) 40px;gap:6px;align-items:end}
+  .mira-icon-control{width:40px;height:40px}
+  .speech-setting{display:grid!important;gap:4px!important;align-content:end;font-size:12px!important}
+  .speech-setting select{width:100%;max-width:none!important;height:40px;padding:0 6px;font-size:12px}
+  .mira-navigation{justify-content:space-between;gap:8px}
+  .mira-navigation .mira-continue{min-width:130px;min-height:46px}
+  .voice-status{font-size:12px}
+}
+@media(max-width:390px){
+  .mira-playback-group{display:flex;flex-wrap:wrap;gap:7px}
+  .mira-icon-control{width:36px;height:38px}
+  .speech-setting{flex:1 1 43%;min-width:0}
+  .speech-setting select{font-size:12px;padding-inline:5px}
+  .mira-playback-group>.mira-icon-control:last-child{margin-left:auto}
+  .mira-other-tools{display:grid;gap:0}
+}
+@media(prefers-reduced-motion:reduce){.mira-option,.mira-icon-control{transition:none}}

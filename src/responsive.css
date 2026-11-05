@@ -1,0 +1,222 @@
+/* Responsive system layer. Kept last so shared sizing and viewport behavior
+   stay consistent across the workspace and the community application. */
+:root {
+  --layout-phone-gutter: clamp(14px, 4vw, 22px);
+  --layout-tablet-gutter: clamp(22px, 3vw, 36px);
+  --layout-nav-height: 68px;
+  --layout-transition: 200ms cubic-bezier(.2,.75,.25,1);
+}
+
+html { scroll-padding-top: 76px; }
+body { overflow-x: clip; }
+img, video, canvas, svg { max-width: 100%; }
+.main-column, .page, .vc-app, .vc-page-body, .vc-post, .vc-dm-app,
+.health-conversation, .card, .modal { min-width: 0; }
+.page, .vc-page-body { scroll-margin-top: 76px; }
+button, a, input, select, textarea { touch-action: manipulation; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+@media (min-width: 761px) and (max-width: 1023px) {
+  .app-shell { grid-template-columns: 72px minmax(0, 1fr); }
+  .sidebar { width: 72px; min-width: 72px; padding-inline: 5px; }
+  .sidebar .brand { justify-content: center; padding: 0 0 20px; }
+  .sidebar .brand-word, .sidebar .nav-label, .sidebar .nav-item > span:not(.nav-icon),
+  .sidebar .nav-meta, .sidebar .privacy-mini, .sidebar .account > div,
+  .sidebar .account-menu { display: none; }
+  .sidebar .nav-item { justify-content: center; padding-inline: 0; }
+  .sidebar .account { justify-content: center; padding: 12px 0 0; }
+  .vc-app[data-community-page] { grid-template-columns: 72px minmax(0,1fr); }
+  .vc-app[data-community-page] > .sidebar { width: 72px; min-width: 72px; }
+  .page { padding-inline: var(--layout-tablet-gutter); }
+  .vc-page-body { padding-inline: var(--layout-tablet-gutter); }
+  .home-feed-layout, .split-layout { grid-template-columns: minmax(0, 1fr); }
+  .home-aside, .side-card { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+@media (min-width: 761px) {
+  .vc-dock-more { display: none; }
+}
+
+@media (max-width: 760px) {
+  :root { --layout-nav-height: 72px; }
+  .app-shell { display: block; min-height: 100dvh; padding-bottom: calc(var(--layout-nav-height) + env(safe-area-inset-bottom)); }
+  .app-shell > .sidebar { display: none; }
+  .main-column { width: 100%; min-height: 100dvh; }
+  .topbar { position: sticky; top: 0; height: 58px; min-height: 58px; z-index: 18; gap: 9px; padding: 0 var(--layout-phone-gutter); }
+  .breadcrumb { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 12px; }
+  .breadcrumb strong { font-size: 13px; }
+  .demo-chip { display: none; }
+  .global-search { width: auto; min-width: 0; max-width: 40vw; height: 40px; flex: 1 1 140px; }
+  .global-search input { min-width: 0; font-size: 14px; }
+  .round-btn { width: 42px; height: 42px; flex: none; }
+  .topbar > .avatar { width: 36px; height: 36px; flex: none; }
+  .page { width: 100%; max-width: none; margin: 0; padding: 20px var(--layout-phone-gutter) calc(var(--layout-nav-height) + 20px + env(safe-area-inset-bottom)); }
+  .page-heading { flex-wrap: wrap; gap: 10px; margin-bottom: 17px; }
+  .page-heading h1 { font-size: clamp(22px, 6vw, 28px); line-height: 1.16; }
+  .page-heading p { font-size: 14px; line-height: 1.5; }
+  .heading-actions { width: 100%; margin-left: 0; flex-wrap: wrap; }
+  .heading-actions > .btn { min-height: 44px; }
+  .card { padding: clamp(14px, 4vw, 20px); border-radius: 15px; }
+  .card-head h2, .card-head h3 { font-size: 15px; }
+  .btn, .btn.small { min-height: 44px; padding: 0 14px; font-size: 13px; }
+  .btn.small { padding-inline: 12px; }
+  .post-copy, .vc-post-copy { font-size: 15px; line-height: 1.55; }
+  .post-author, .vc-post-author { font-size: 14px; }
+  .post-card, .vc-post { border-radius: 16px; }
+  .post-card .post-action { min-width: 44px; min-height: 44px; }
+  .form-field { margin-block: 12px; }
+  .form-field label, .form-label { font-size: 14px; }
+  .form-field input, .form-field select, .form-field textarea,
+  input.search-field, .search-field { min-height: 46px; font-size: 16px; }
+  .mobile-nav { position: fixed; z-index: 35; left: 50%; right: auto; bottom: max(7px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: min(580px, calc(100vw - 20px)); min-height: 64px; display: flex; align-items: stretch; justify-content: space-around; gap: 2px; padding: 5px; border: 1px solid #e8e1e8; border-radius: 20px; background: #fffdfbf2; box-shadow: 0 8px 28px #3226381a, inset 0 1px 0 #fff; backdrop-filter: blur(18px) saturate(145%); -webkit-backdrop-filter: blur(18px) saturate(145%); }
+  .mobile-nav > button, .mobile-more > summary { min-width: 0; min-height: 52px; flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 3px 2px; border: 0; border-radius: 14px; background: transparent; color: #817a84; font-size: 10px; font-weight: 600; line-height: 1.1; white-space: nowrap; list-style: none; cursor: pointer; }
+  .mobile-more > summary::-webkit-details-marker { display: none; }
+  .mobile-nav .nav-icon { width: 30px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 9px; background: transparent; color: inherit; }
+  .mobile-nav .nav-icon svg { width: 19px; height: 19px; }
+  .mobile-nav > button.active, .mobile-more.has-active > summary { color: #684c6d; background: #f5edf4; }
+  .mobile-nav > button:active, .mobile-more > summary:active { transform: scale(.96); }
+  .mobile-more { position: relative; flex: 1 1 0; min-width: 0; display: flex; }
+  .mobile-more-menu { position: absolute; right: -4px; bottom: calc(100% + 12px); width: min(245px, calc(100vw - 32px)); max-height: min(62dvh, 440px); overflow: auto; padding: 7px; border: 1px solid #e9e3e9; border-radius: 16px; background: #fff; box-shadow: 0 14px 42px #30253226; animation: responsive-menu-in var(--layout-transition) both; }
+  .mobile-more-menu button { width: 100%; min-height: 44px; padding: 9px 12px; border: 0; border-radius: 10px; background: transparent; color: #39333b; text-align: left; font-size: 14px; }
+  .mobile-more-menu button:hover, .mobile-more-menu button[aria-current="page"] { background: #f6f1f6; color: #684c6d; }
+
+  /* Community is a separate application shell; its dock remains the one
+     mobile navigation bar on those routes. */
+  .vc-app[data-community-page] { display: flex; flex-direction: column; min-height: 100dvh; padding: 0 0 calc(72px + env(safe-area-inset-bottom)); }
+  .vc-app[data-community-page] > .sidebar { display: none; }
+  .vc-app[data-community-page] > .vc-topbar { position: sticky; top: 0; z-index: 22; grid-column: auto; grid-row: auto; width: 100%; height: 56px; min-height: 56px; gap: 8px; padding: 0 var(--layout-phone-gutter); }
+  .vc-app[data-community-page] > .vc-topbar .vc-brand { display: flex; min-width: 0; font-size: 14px; }
+  .vc-app[data-community-page] > .vc-topbar .vc-brand small { font-size: 7px; }
+  .vc-app[data-community-page] > .vc-topbar .vc-global-search { min-width: 0; flex: 1 1 auto; height: 40px; margin: 0; }
+  .vc-app[data-community-page] > .vc-topbar .vc-global-search input { min-width: 0; font-size: 14px; }
+  .vc-app[data-community-page] > .vc-topbar .vc-global-search kbd { display: none; }
+  .vc-app[data-community-page] > .vc-topbar .vc-top-actions { flex: none; }
+  .vc-app[data-community-page] > .vc-topbar .vc-top-actions .vc-icon-button:first-child { display: none; }
+  .vc-app[data-community-page] > .vc-topbar .vc-top-avatar { display: none; }
+  .vc-app[data-community-page] > .vc-page-body { width: 100%; max-width: none; height: auto; min-height: calc(100dvh - 56px); flex: 1 1 auto; grid-column: auto; grid-row: auto; overflow: visible; margin: 0; padding: 18px var(--layout-phone-gutter) calc(92px + env(safe-area-inset-bottom)); }
+  .vc-app[data-community-page] .vc-page-heading { align-items: flex-start; gap: 12px; }
+  .vc-app[data-community-page] .vc-context-title > span:first-child { font-size: clamp(23px, 6vw, 29px); }
+  .vc-app[data-community-page] .vc-context-title > span { font-size: 13px; line-height: 1.45; }
+  .vc-app[data-community-page] .vc-post { padding: 15px; }
+  .vc-app[data-community-page] .vc-post-title { font-size: 16px; }
+  .vc-app[data-community-page] .vc-post-copy { font-size: 14px; line-height: 1.55; }
+  .vc-app[data-community-page] .vc-post-actions { gap: 4px; }
+  .vc-app[data-community-page] .vc-post-actions button { min-width: 44px; min-height: 44px; }
+  .vc-app[data-community-page] .vc-dock { position: fixed; z-index: 60; display: flex !important; visibility: visible; pointer-events: auto; left: 50%; right: auto; bottom: max(7px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: min(560px, calc(100vw - 20px)); max-width: none; min-height: 64px; justify-content: space-around; gap: 2px; padding: 5px; border: 1px solid #e8e1e8; border-radius: 20px; background: #fffdfbf2; box-shadow: 0 8px 28px #3226381a, inset 0 1px 0 #fff; backdrop-filter: blur(18px) saturate(145%); -webkit-backdrop-filter: blur(18px) saturate(145%); }
+  .vc-app[data-community-page] .vc-dock > button, .vc-app[data-community-page] .vc-dock-more > summary { min-width: 0; min-height: 52px; height: auto; flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 3px 2px; border-radius: 14px; color: #817a84; font-size: 10px; }
+  .vc-app[data-community-page] .vc-dock > button.active, .vc-app[data-community-page] .vc-dock-more > summary { background: transparent; }
+  .vc-app[data-community-page] .vc-dock > button.active { background: #f5edf4; color: #684c6d; }
+  .vc-app[data-community-page] .vc-dock-icon svg { width: 19px; height: 19px; }
+  .vc-app[data-community-page] .vc-dock-label { display: block; font-size: 10px; line-height: 1.1; }
+  .vc-app-role-patient .vc-dock > button[data-community-section="communities"] { display: none; }
+  .vc-dock-more { position: relative; display: flex; flex: 1 1 0; min-width: 0; }
+  .vc-dock-more > summary { display: flex; flex-direction: column; align-items: center; justify-content: center; list-style: none; cursor: pointer; }
+  .vc-dock-more > summary::-webkit-details-marker { display: none; }
+  .vc-dock-more-menu { position: absolute; right: -2px; bottom: calc(100% + 12px); width: min(235px, calc(100vw - 32px)); max-height: min(62dvh, 440px); overflow: auto; padding: 7px; border: 1px solid #e9e3e9; border-radius: 16px; background: #fff; box-shadow: 0 14px 42px #30253226; animation: responsive-menu-in var(--layout-transition) both; }
+  .vc-dock-more-menu button { width: 100%; min-height: 44px; padding: 9px 12px; border: 0; border-radius: 10px; background: transparent; color: #39333b; text-align: left; font-size: 14px; }
+  .vc-dock-more-menu button:hover { background: #f6f1f6; color: #684c6d; }
+  .vc-create-fab { right: 16px; bottom: calc(84px + env(safe-area-inset-bottom)); }
+
+  .home-feed-layout, .split-layout { display: block; }
+  .home-aside, .side-card { display: flex; flex-direction: column; }
+  .discover-grid { grid-template-columns: minmax(0,1fr); }
+  .discover-card { min-height: 0; padding: 18px; }
+  .home-greeting { gap: 12px; }
+  .home-greeting h1 { font-size: clamp(25px, 7vw, 34px); }
+  .home-stories { margin-inline: calc(-1 * var(--layout-phone-gutter)); padding-inline: var(--layout-phone-gutter); }
+  .home-posts, .discussion-list { min-width: 0; }
+  .context-tabs { overflow-x: auto; scrollbar-width: none; }
+  .context-tabs::-webkit-scrollbar, .health-tabs::-webkit-scrollbar { display: none; }
+  .context-tabs button { min-height: 44px; flex: 0 0 auto; font-size: 13px; }
+  .health-tabs { max-width: calc(100vw - 2 * var(--layout-phone-gutter)); overflow-x: auto; }
+  .health-tabs button { min-height: 44px; flex: 0 0 auto; font-size: 13px; }
+  .health-heading { align-items: flex-start; }
+  .health-heading h1 { font-size: clamp(25px, 7vw, 32px); }
+  .health-heading p { font-size: 14px; }
+  .health-conversation { padding: 17px 14px; }
+  .mira-question { margin-top: 14px; }
+  .mira-question h2 { font-size: clamp(23px, 6.5vw, 29px); }
+  .mira-question > p { font-size: 14px; }
+  .mira-navigation { position: sticky; bottom: calc(var(--layout-nav-height) + env(safe-area-inset-bottom)); z-index: 4; margin: 12px -14px -17px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: #fcfaf8f2; border-top: 1px solid #eee8ed; backdrop-filter: blur(12px); }
+  .mira-navigation .mira-continue { min-height: 48px; }
+  .mira-playback-group { grid-template-columns: repeat(3, 40px) minmax(0,1fr); }
+  .mira-playback-group .speech-setting { grid-column: span 2; }
+  .mira-playback-group .speech-setting:last-of-type { grid-column: span 2; }
+  .voice-status { font-size: 13px; }
+
+  .vc-app.vc-reels-open > .vc-topbar .vc-global-search,
+  .vc-app.vc-messages-open > .vc-topbar .vc-global-search { display: none; }
+  .vc-app.vc-reels-open > .vc-page-body.vc-reels-body,
+  .vc-app.vc-messages-open > .vc-page-body.vc-messages-body { width: 100%; height: auto; min-height: 0; flex: 1 1 0; overflow: hidden; }
+  .vc-app.vc-reels-open > .vc-page-body.vc-reels-body { padding: 4px 5px calc(74px + env(safe-area-inset-bottom)); }
+  .vc-app.vc-reels-open .vc-reel-feed { height: 100%; min-height: 0; max-height: none; --reel-height: min(100%, calc(100dvh - 142px)); padding: 0; align-content: center; }
+  .vc-app.vc-reels-open .vc-reel-feed .vc-reel-card { min-height: 0; max-height: 100%; }
+  .vc-app.vc-reels-open .vc-reel-media { min-height: 0; max-height: var(--reel-height); width: min(calc(var(--reel-height) * var(--reel-ratio)), calc(100vw - 86px)); max-width: calc(100vw - 86px); }
+  .vc-app.vc-reels-open .vc-reel-rail button { min-width: 40px; min-height: 42px; }
+  .vc-app.vc-messages-open > .vc-page-body.vc-messages-body { padding: 4px 5px calc(74px + env(safe-area-inset-bottom)); }
+  .vc-app.vc-messages-open .vc-messages.vc-dm-app { width: 100%; height: 100%; min-height: 0; }
+  .vc-app.vc-messages-open .vc-dm-layout { height: 100%; min-height: 0; }
+  .vc-app.vc-messages-open .vc-dm-chat { min-height: 0; }
+
+  .vc-masonry { column-count: 2; column-gap: 12px; }
+  .vc-discovery-card { break-inside: avoid; margin-bottom: 16px; }
+  .vc-discovery-media-wrap { max-width: 100%; }
+  .vc-profile-body { padding-inline: 16px; }
+  .vc-profile-page h1 { overflow-wrap: anywhere; font-size: clamp(23px, 7vw, 30px); }
+  .vc-profile-stats { flex-wrap: wrap; gap: 12px 20px; }
+  .vc-profile-tabs { overflow-x: auto; }
+  .vc-profile-tabs button { min-height: 44px; flex: 0 0 auto; }
+  .vc-community-grid, .research-grid, .doc-grid { grid-template-columns: minmax(0,1fr); }
+  .vc-community-tile { min-height: 0; }
+  .vc-post-comments-panel { position: fixed; z-index: 46; inset: auto 0 0; width: 100%; max-height: 0; border: 0; border-radius: 22px 22px 0 0; background: #fff; box-shadow: 0 -14px 40px #2c24301c; transform: translateY(16px); }
+  .vc-post-comments-panel.is-open { max-height: min(86dvh, 780px); padding: 6px max(16px,env(safe-area-inset-left)) calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid #eee8ed; opacity: 1; transform: translateY(0); }
+  .vc-post-comments-panel > header { min-height: 48px; }
+  .vc-post-comments-content { max-height: min(76dvh, 690px); }
+  .vc-post-comments-thread-list { max-height: min(63dvh, 560px); overflow-y: auto; overscroll-behavior: contain; }
+  .vc-post-comments-panel .comment-form { position: sticky; bottom: 0; padding-bottom: max(4px,env(safe-area-inset-bottom)); }
+  .vc-post-comments-panel .comment-form textarea { font-size: 16px; }
+  .modal-root .modal:not(.story-sheet):not(.comments-sheet) { width: min(560px, calc(100vw - 24px)); max-height: min(88dvh, 820px); overflow: auto; }
+  .auth-shell { min-height: 100dvh; }
+}
+
+@media (max-width: 420px) {
+  :root { --layout-phone-gutter: 13px; --layout-nav-height: 68px; }
+  .topbar { gap: 7px; }
+  .breadcrumb { font-size: 11px; }
+  .global-search { max-width: 35vw; flex-basis: 100px; }
+  .mobile-nav { width: calc(100vw - 14px); bottom: max(5px,env(safe-area-inset-bottom)); }
+  .mobile-nav > button, .mobile-more > summary { font-size: 9px; }
+  .vc-app[data-community-page] .vc-dock { width: calc(100vw - 14px); bottom: max(5px,env(safe-area-inset-bottom)); }
+  .vc-app[data-community-page] .vc-dock > button, .vc-app[data-community-page] .vc-dock-more > summary { font-size: 9px; }
+  .vc-app[data-community-page] .vc-dock-label { font-size: 9px; }
+  .vc-post { padding: 13px; }
+  .vc-post-actions button { padding-inline: 3px; }
+  .vc-post-actions button span { font-size: 11px; }
+  .health-side-col { grid-template-columns: 1fr; }
+  .health-resource-links { grid-template-columns: 1fr; }
+  .mira-playback-group { grid-template-columns: repeat(3, 38px) minmax(0,1fr); gap: 5px; }
+  .mira-icon-control { width: 38px; height: 40px; }
+  .vc-masonry { column-gap: 9px; }
+}
+
+@media (max-width: 360px) {
+  .vc-app[data-community-page] > .vc-topbar .vc-brand { display: none; }
+  .vc-app[data-community-page] > .vc-topbar .vc-global-search { margin-left: 0; }
+  .page-heading > .heading-actions { gap: 6px; }
+  .page-heading > .heading-actions > .btn { flex: 1 1 auto; }
+}
+
+@media (max-width: 760px) and (orientation: landscape) {
+  .mobile-nav, .vc-app[data-community-page] .vc-dock { min-height: 56px; }
+  .mobile-nav > button, .mobile-more > summary,
+  .vc-app[data-community-page] .vc-dock > button,
+  .vc-app[data-community-page] .vc-dock-more > summary { min-height: 44px; }
+  .vc-app.vc-reels-open .vc-reel-feed { --reel-height: min(calc(100dvh - 124px), 75dvh); }
+  .vc-app.vc-reels-open .vc-reel-media { width: min(calc(var(--reel-height) * var(--reel-ratio)), calc(100vw - 96px)); max-width: calc(100vw - 96px); }
+  .vc-post-comments-panel.is-open { max-height: 92dvh; }
+}
+
+@keyframes responsive-menu-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
