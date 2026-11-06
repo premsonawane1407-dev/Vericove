@@ -1217,6 +1217,21 @@ html[data-theme="dark"] .settings-switch:checked{background:#886d91;border-color
 html[data-theme="dark"] .settings-switch:after{background:#f8f5f8}
 html[data-theme="dark"] .profile-private-note,html[data-theme="dark"] .auth-notice{color:#bcb4c0}
 @media(prefers-reduced-motion:reduce){html[data-theme="dark"] *,html[data-theme="dark"] *::before,html[data-theme="dark"] *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+/* Mira's two aligned mascot sheets fit the existing warm lavender companion card. */
+.mira-hero{position:relative;z-index:0;grid-template-columns:minmax(0,1fr) minmax(400px,500px);min-height:450px;overflow:visible;background-image:url('/mascots/mira-depth.svg');background-position:center;background-size:cover}
+.mira-portrait{position:relative;z-index:2;isolation:isolate;align-self:stretch;align-content:center;gap:4px;overflow:visible}
+.mira-portrait::before{content:"";position:absolute;z-index:-1;left:12%;right:2%;bottom:4%;height:72px;border-radius:50%;background:radial-gradient(ellipse at center,#66536c38 0%,#8c7c9620 42%,transparent 74%);filter:blur(12px);transform:translateY(18px)}
+.mira-mascot{position:relative;z-index:1;display:block;width:min(124%,500px);max-width:none;aspect-ratio:1;margin:-38px 0 -38px -12%;padding:0;border:0;border-radius:50%;background-color:transparent;background-image:url('/mascots/nurse-directions.webp');background-repeat:no-repeat;background-size:300% 300%;background-position:var(--mascot-x,50%) var(--mascot-y,50%);filter:drop-shadow(0 22px 24px #56445b32);cursor:pointer;animation:mira-mascot-float 5.5s ease-in-out infinite}
+.mira-mascot:focus-visible{outline:3px solid #917b99;outline-offset:3px}
+.mira-mascot[data-reaction="true"]{background-image:url('/mascots/nurse-reactions.webp')}
+.mira-portrait>span{position:relative;color:#7d7480;font-size:10px}
+.mira-hero .mira-label>.mira-flower{width:27px;height:27px;transform:scale(.36);margin:-24px -22px -24px -25px}
+.mira-hero .mira-label>.mira-flower b{border-color:#f1edf1}
+@keyframes mira-mascot-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(max-width:900px){.mira-hero{grid-template-columns:minmax(0,1fr) minmax(300px,360px);min-height:410px}.mira-mascot{width:min(125%,420px);margin-left:-10%}}
+@media(max-width:700px){.mira-hero{grid-template-columns:1fr;gap:8px;padding:20px 18px 40px;margin-bottom:54px}.mira-portrait{display:grid;min-height:290px}.mira-portrait::before{left:14%;right:14%;bottom:0}.mira-mascot{width:min(112%,330px);margin:-18px 0 -42px -6%}}
+@media(prefers-reduced-motion:reduce){.mira-mascot{animation:none}}
 @media(max-width:820px){.vc-app.vc-reels-open>.vc-page-body.vc-reels-body{padding:0 4px 80px}.vc-app.vc-reels-open .vc-reel-feed{--reel-height:min(88dvh,calc(100dvh - 136px),920px);padding:0}.vc-reel-media{width:min(calc(var(--reel-height)*var(--reel-ratio)),calc(100vw - 128px));max-width:calc(100vw - 128px)}.vc-reel-rail{gap:8px}.vc-reel-rail button,.vc-reel-rail button:hover{min-width:39px;min-height:42px}.vc-app.vc-messages-open>.vc-page-body.vc-messages-body{padding:6px 8px 90px}.vc-dm-chat{min-height:0}}
 @media(max-width:620px){.vc-app[data-community-page].vc-reels-open,.vc-app[data-community-page].vc-messages-open{grid-template-rows:52px minmax(0,1fr)}.vc-app.vc-reels-open>.vc-topbar,.vc-app.vc-messages-open>.vc-topbar{height:52px;min-height:52px}.vc-app.vc-reels-open>.vc-page-body.vc-reels-body{height:calc(100dvh - 52px);padding:0 2px 78px}.vc-app.vc-reels-open .vc-reel-feed{--reel-height:min(86dvh,calc(100dvh - 130px),840px)}.vc-reel-media{width:min(calc(var(--reel-height)*var(--reel-ratio)),calc(100vw - 110px));max-width:calc(100vw - 110px);border-radius:12px}.vc-reel-feed .vc-reel-card{gap:5px}.vc-reel-rail{gap:5px}.vc-reel-rail button,.vc-reel-rail button:hover{min-width:36px;min-height:39px}.vc-reel-rail button svg{width:19px;height:19px}.vc-reel-rail button span{font-size:9px}.vc-reel-rail .vc-reel-sound span{font-size:8px}.vc-app.vc-messages-open>.vc-page-body.vc-messages-body{height:calc(100dvh - 52px);padding:5px 5px 84px}.vc-messages.vc-dm-app{min-height:0}.vc-dm-chat{min-height:0}}
 
@@ -1339,3 +1354,18 @@ html[data-theme="dark"] .landing,html[data-theme="dark"] .landing-modules,html[d
 html[data-theme="dark"] .landing-header,html[data-theme="dark"] .module-card,html[data-theme="dark"] .auth-box,html[data-theme="dark"] .health-modal{background:#201e23;border-color:var(--line);color:var(--ink)}
 html[data-theme="dark"] .landing-hero,html[data-theme="dark"] .auth-art,html[data-theme="dark"] .dashboard-banner,html[data-theme="dark"] .mira-hero{background:#28242d;border-color:#413947;color:var(--ink)}
 @media(prefers-reduced-motion:reduce){html[data-theme="dark"] *,html[data-theme="dark"] *::before,html[data-theme="dark"] *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+/* Keep the mascot treatment after the page's responsive and theme rules. */
+.mira-hero{overflow:visible;background-image:url('/mascots/mira-depth.svg');background-position:center;background-size:cover}
+.mira-portrait{overflow:visible}
+.mira-mascot{width:min(124%,500px);max-width:none;margin:-38px 0 -38px -12%;filter:drop-shadow(0 22px 24px #56445b32)}
+@media(max-width:900px){.mira-hero{grid-template-columns:minmax(0,1fr) minmax(300px,360px);min-height:410px}.mira-mascot{width:min(125%,420px);margin-left:-10%}}
+@media(max-width:700px){.mira-hero{grid-template-columns:1fr;gap:8px;padding:20px 18px 40px;margin-bottom:54px}.mira-hero .mira-portrait{display:grid;min-height:290px}.mira-portrait::before{left:14%;right:14%;bottom:0}.mira-mascot{width:min(112%,330px);margin:-18px 0 -42px -6%}}
+html[data-theme="dark"] .mira-hero{background-image:linear-gradient(#28242dd0,#28242dd0),url('/mascots/mira-depth.svg')}
+.mira-portrait .mira-nameplate{position:absolute;left:50%;bottom:16px;z-index:4;display:grid;place-items:center;min-width:74px;padding:7px 17px;border:1px solid #ffffffc2;border-radius:999px;background:#ffffffdb;color:#6e5974;font:800 10px Manrope,sans-serif;letter-spacing:1.7px;box-shadow:0 10px 28px #45344d30,inset 0 1px #fff;backdrop-filter:blur(12px);transform:translateX(-50%);pointer-events:none}
+@media(max-width:700px){.mira-portrait .mira-nameplate{bottom:18px}}
+html[data-theme="dark"] .mira-portrait .mira-nameplate{background:#302a34e8;border-color:#ffffff30;color:#eee5f0}
+.mira-portrait .mira-nameplate{grid-auto-flow:column;gap:10px;min-width:118px;min-height:42px;padding:8px 19px;border-color:#ffffffed;background:linear-gradient(145deg,#fffefef2 0%,#f4edf7ee 58%,#f8eff0ee);color:#66516e;font-size:12px;letter-spacing:2px;box-shadow:0 13px 30px #43344935,0 0 0 4px #e3d7e77a,inset 0 1px #fff}
+.mira-portrait .mira-nameplate::before,.mira-portrait .mira-nameplate::after{content:"✦";color:#a887b0;font-size:10px;line-height:1;text-shadow:0 1px 5px #c8a8ce70}
+html[data-theme="dark"] .mira-portrait .mira-nameplate{background:linear-gradient(145deg,#403746f5,#302a34f0);border-color:#ffffff50;color:#f0e7f1;box-shadow:0 13px 30px #0005,0 0 0 4px #9e85a333,inset 0 1px #ffffff30}
+html[data-theme="dark"] .mira-portrait .mira-nameplate::before,html[data-theme="dark"] .mira-portrait .mira-nameplate::after{color:#d1afd2}
