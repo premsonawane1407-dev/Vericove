@@ -206,6 +206,87 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .page-heading > .heading-actions > .btn { flex: 1 1 auto; }
 }
 
+/* Instagram-inspired navigation: a fixed icon rail that reveals labels beside each icon. */
+@media (min-width: 761px) {
+  .app-shell { grid-template-columns: 72px minmax(0, 1fr); }
+  .app-shell, .vc-app[data-community-page] {
+    transition: grid-template-columns 220ms cubic-bezier(.2,.75,.25,1);
+  }
+  .app-shell:has(> .sidebar:hover), .app-shell:has(> .sidebar:focus-within),
+  .vc-app[data-community-page]:has(> .sidebar:hover), .vc-app[data-community-page]:has(> .sidebar:focus-within) {
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+  .sidebar {
+    width: 72px;
+    min-width: 72px;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 18px 8px 14px;
+    border-right: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    overflow: hidden;
+    transition: width 220ms cubic-bezier(.2,.75,.25,1), min-width 220ms cubic-bezier(.2,.75,.25,1);
+  }
+  .sidebar:hover, .sidebar:focus-within {
+    width: 250px;
+    min-width: 250px;
+    padding-inline: 18px;
+    box-shadow: 8px 0 24px #29232a0d;
+    z-index: 30;
+  }
+  .sidebar .brand { height: 42px; justify-content: center; gap: 11px; padding: 0; margin: 0 0 28px; flex: none; }
+  .sidebar:hover .brand, .sidebar:focus-within .brand { justify-content: flex-start; padding: 0 8px; }
+  .sidebar .brand-mark { width: 40px; height: 40px; flex: none; border-radius: 13px; }
+  .sidebar .brand-word { display: block; width: 0; max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap; transition: width 180ms ease, max-width 180ms ease, opacity 140ms ease; }
+  .sidebar:hover .brand-word, .sidebar:focus-within .brand-word { width: 145px; max-width: 145px; opacity: 1; }
+  .sidebar .nav-scroll { min-height: 0; overflow-x: hidden; overflow-y: auto; scrollbar-width: none; }
+  .sidebar .nav-scroll::-webkit-scrollbar { display: none; }
+  .sidebar .nav-scroll > nav { display: flex; flex-direction: column; gap: 18px; }
+  .sidebar .nav-label { display: none; }
+  .sidebar .nav-separator { display: none; }
+  .sidebar .nav-list { display: grid; gap: 7px; }
+  .sidebar .nav-item { position: relative; width: 100%; min-height: 52px; justify-content: center; gap: 12px; padding: 0 5px; border-radius: 12px; color: #44414a; font-size: 14px; font-weight: 500; }
+  .sidebar:hover .nav-item, .sidebar:focus-within .nav-item { justify-content: flex-start; }
+  .sidebar .nav-icon { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 42px; border-radius: 12px; }
+  .sidebar .nav-item svg { width: 24px; height: 24px; }
+  .sidebar .nav-item > span:not(.nav-icon) { display: none; }
+  .sidebar:hover .nav-item > span:not(.nav-icon), .sidebar:focus-within .nav-item > span:not(.nav-icon) {
+    display: inline;
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    overflow: visible;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    border-radius: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    pointer-events: auto;
+  }
+  .sidebar .nav-item.active { color: #312c34; background: transparent; font-weight: 700; }
+  .sidebar .nav-item.active .nav-icon { background: transparent; box-shadow: none; }
+  .sidebar .nav-item.active svg { stroke-width: 2.4; }
+  .sidebar .nav-item:hover { background: #f7f5f7; }
+  .sidebar .nav-meta { margin-left: auto; }
+  .sidebar-footer { flex: none; margin-top: auto; padding-top: 12px; }
+  .sidebar .sidebar-settings { width: 100%; margin: 0; color: #514d55; }
+  .sidebar .sidebar-settings:hover, .sidebar .sidebar-settings:focus-visible { background: #f7f5f7; }
+  .vc-app[data-community-page] { grid-template-columns: 72px minmax(0, 1fr); }
+  .vc-app[data-community-page] > .sidebar { width: 72px; min-width: 72px; }
+  .vc-app[data-community-page] > .sidebar:hover, .vc-app[data-community-page] > .sidebar:focus-within { width: 250px; min-width: 250px; }
+  .vc-app[data-community-page] > .vc-topbar > .vc-brand { display: none; }
+  .vc-app[data-community-page]:has(> .vc-page-body.vc-explore-wide) > .vc-topbar .vc-global-search,
+  .vc-app[data-community-page]:has(> .vc-page-body.vc-communities-wide) > .vc-topbar .vc-global-search { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .sidebar * { transition-duration: 0.01ms !important; }
+}
+
 @media (max-width: 760px) and (orientation: landscape) {
   .mobile-nav, .vc-app[data-community-page] .vc-dock { min-height: 56px; }
   .mobile-nav > button, .mobile-more > summary,
@@ -214,6 +295,99 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .vc-app.vc-reels-open .vc-reel-feed { --reel-height: min(calc(100dvh - 124px), 75dvh); }
   .vc-app.vc-reels-open .vc-reel-media { width: min(calc(var(--reel-height) * var(--reel-ratio)), calc(100vw - 96px)); max-width: calc(100vw - 96px); }
   .vc-post-comments-panel.is-open { max-height: 92dvh; }
+}
+
+/* Community home and directory use the reclaimed title space for content. */
+.vc-page-body.vc-community-home { padding-top: 16px; }
+.vc-reel-feed { row-gap: 14px; }
+.vc-stories { margin-bottom: 20px; padding-bottom: 17px; }
+.vc-story-strip { gap: 22px; padding: 4px 3px; }
+.vc-story { width: 78px; min-width: 78px; gap: 8px; font-size: 12px; }
+.vc-story > span:last-child { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vc-story-ring { width: 74px; height: 74px; }
+.vc-page-body.vc-communities-wide { width: 100%; max-width: none; margin: 0; padding: 16px clamp(20px, 3vw, 56px) 32px; }
+.vc-communities-page { width: 100%; max-width: none; margin: 0; }
+.vc-communities-search { width: 100%; margin: 0 0 20px; }
+.vc-communities-search .vc-explore-search { width: 100%; max-width: none; height: 56px; padding-inline: 18px; border-radius: 18px; }
+.vc-communities-search .vc-explore-search input { font-size: 15px; }
+
+@media (max-width: 760px) {
+  .vc-page-body.vc-community-home { padding: 13px 14px calc(96px + env(safe-area-inset-bottom)); }
+  .vc-stories { margin-bottom: 14px; padding-bottom: 14px; }
+  .vc-story-strip { gap: 15px; padding-inline: 1px; }
+  .vc-story { width: 70px; min-width: 70px; gap: 7px; font-size: 11px; }
+  .vc-story-ring { width: 66px; height: 66px; }
+  .vc-page-body.vc-communities-wide { padding: 12px 13px calc(96px + env(safe-area-inset-bottom)); }
+  .vc-communities-search { margin-bottom: 14px; }
+  .vc-communities-search .vc-explore-search { height: 52px; padding-inline: 15px; border-radius: 16px; }
+  .vc-communities-search .vc-explore-search input { font-size: 16px; }
+
+  .vc-app.vc-messages-open {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    min-height: 0;
+    padding: 0 0 calc(var(--layout-nav-height) + env(safe-area-inset-bottom));
+    overflow: hidden;
+  }
+  .vc-app.vc-messages-open > .vc-topbar { position: relative; top: auto; z-index: 22; flex: 0 0 54px; height: 54px; min-height: 54px; padding-inline: 10px; }
+  .vc-app.vc-messages-open > .vc-page-body.vc-messages-body {
+    display: flex;
+    flex: 1 1 0;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .vc-app.vc-messages-open .vc-messages.vc-dm-app {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .vc-app.vc-messages-open .vc-dm-list { min-height: 0; padding: 10px 12px 6px; grid-template-rows: auto auto auto auto minmax(0, 1fr); }
+  .vc-app.vc-messages-open .vc-dm-self { padding: 0 4px 8px; }
+  .vc-app.vc-messages-open .vc-dm-self strong { font-size: 17px; }
+  .vc-app.vc-messages-open .vc-dm-search { height: 44px; margin: 0 0 8px; }
+  .vc-app.vc-messages-open .vc-dm-stories { gap: 9px; padding: 2px 0 10px; }
+  .vc-app.vc-messages-open .vc-dm-story { flex-basis: 66px; gap: 5px; font-size: 11px; }
+  .vc-app.vc-messages-open .vc-dm-story .avatar { width: 50px; height: 50px; }
+  .vc-app.vc-messages-open .vc-dm-inbox-tabs { padding: 4px 6px 6px; }
+  .vc-app.vc-messages-open .vc-dm-inbox-tabs button { min-height: 44px; font-size: 14px; }
+  .vc-app.vc-messages-open .vc-dm-thread-list { min-height: 0; padding: 5px 0; }
+  .vc-app.vc-messages-open .vc-dm-thread { min-height: 68px; gap: 10px; padding: 7px 8px; }
+  .vc-app.vc-messages-open .vc-dm-thread .avatar { width: 50px; height: 50px; }
+  .vc-app.vc-messages-open .vc-dm-thread-copy strong { font-size: 14px; }
+  .vc-app.vc-messages-open .vc-dm-thread-copy small { margin-top: 3px; font-size: 12px; }
+  .vc-app.vc-messages-open .vc-dm-thread time { font-size: 11px; }
+  .vc-app.vc-messages-open .vc-dm-chat { min-height: 0; grid-template-rows: 64px minmax(0, 1fr) auto; }
+  .vc-app.vc-messages-open .vc-dm-chat-head { gap: 7px; padding: 0 8px; }
+  .vc-app.vc-messages-open .vc-dm-chat-head > .avatar { width: 36px; height: 36px; }
+  .vc-app.vc-messages-open .vc-dm-chat-person { flex: 1 1 auto; gap: 3px; }
+  .vc-app.vc-messages-open .vc-dm-chat-person strong { overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+  .vc-app.vc-messages-open .vc-dm-chat-person small { font-size: 10px; }
+  .vc-app.vc-messages-open .vc-dm-chat-tools { flex: none; gap: 0; }
+  .vc-app.vc-messages-open .vc-dm-chat-tools button { width: 44px; height: 44px; }
+  .vc-app.vc-messages-open .vc-dm-back { width: 40px; height: 44px; }
+  .vc-app.vc-messages-open .vc-dm-messages { gap: 10px; padding: 14px 12px 16px; }
+  .vc-app.vc-messages-open .vc-dm-message-row { max-width: 94%; gap: 7px; }
+  .vc-app.vc-messages-open .vc-dm-message-row > .avatar { width: 28px; height: 28px; }
+  .vc-app.vc-messages-open .vc-dm-bubble { padding: 10px 13px; font-size: 15px; line-height: 1.45; }
+  .vc-app.vc-messages-open .vc-dm-compose { margin: 0 8px 8px; padding: 4px 5px; }
+  .vc-app.vc-messages-open .vc-dm-compose > button { width: 44px; height: 44px; }
+  .vc-app.vc-messages-open .vc-dm-compose input { height: 44px; font-size: 16px; }
+}
+
+@media (max-width: 380px) {
+  .vc-app.vc-messages-open .vc-dm-chat-head { gap: 5px; padding-inline: 6px; }
+  .vc-app.vc-messages-open .vc-dm-chat-head > .avatar { display: none; }
+  .vc-app.vc-messages-open .vc-dm-thread time { display: none; }
 }
 
 @keyframes responsive-menu-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }

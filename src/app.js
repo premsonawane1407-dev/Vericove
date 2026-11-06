@@ -1,8 +1,10 @@
 import { state } from './core.js';
 import { render, setAuthMode } from './views.js';
+import { startAutoContent } from './lib/autoContent.js';
 import './interactions.js';
 import './responsive.css';
 document.addEventListener('health:refresh',render);
+document.addEventListener('content:auto-updated',render);
 const isCommunityPath=/^\/community(?:\/w\/[a-z0-9-]+|\/(?:explore|reels|communities|messages|notifications|profile))?\/?$/i.test(location.pathname);
 if(isCommunityPath){
   state.route='community';
@@ -16,3 +18,4 @@ if(isCommunityPath){
 // when this browser has a remembered workspace session.
 if (!isCommunityPath) setAuthMode('landing');
 render();
+startAutoContent();
