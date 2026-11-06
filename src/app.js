@@ -1,6 +1,6 @@
 import { state } from './core.js';
 import { render, setAuthMode } from './views.js';
-import { startAutoContent } from './lib/autoContent.js';
+import { seedApprovedContent, startAutoContent } from './lib/autoContent.js';
 import './interactions.js';
 import './responsive.css';
 document.documentElement.dataset.theme=state.uiTheme==='dark'?'dark':'light';
@@ -20,5 +20,6 @@ if(isCommunityPath){
 // A fresh visit to the root URL always starts on the public homepage, even
 // when this browser has a remembered workspace session.
 if (!isCommunityPath) setAuthMode('landing');
+seedApprovedContent();
 render();
 startAutoContent();
