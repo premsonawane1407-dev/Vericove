@@ -95,6 +95,7 @@ function settingsPage(){
       <aside class="settings-side-column">
         <section class="card settings-card">
           <div class="card-head"><div><h2>Experience</h2><p>Fine-tune your Vericove workspace.</p></div></div>
+          ${toggle('darkMode','Dark appearance','Use a darker palette throughout Vericove.',state.uiTheme==='dark','data-theme-toggle')}
           ${toggle('uiSounds','Interface sounds','Soft feedback for clicks and section changes.',state.uiSounds!==false,'data-ui-sounds')}
         </section>
         <section class="card settings-card">

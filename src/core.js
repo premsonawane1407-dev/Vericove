@@ -88,6 +88,7 @@ const defaultState = () => ({
   reports:[],
   notifications:[{title:'A new discussion in Endometriosis support',time:'1 hr ago',read:false},{title:'New research in a topic you follow',time:'Yesterday',read:false}],
   notificationSettings:{messages:true,community:true,productUpdates:false},
+  uiTheme:'light',
   viewedSampleStories:[],
   storyLikes:[],
   consent:{researchMatching:false,sharedReports:false},
@@ -109,6 +110,7 @@ state.communityView ||= 'FYP';
 state.savedPapers ||= [];
 state.reports ||= [];
 state.route ||= 'dashboard';
+state.uiTheme ||= 'light';
 export const persist = () => {
   // Authenticated health content stays in memory and Supabase, not browser storage.
   const snapshot = state.session?.authUserId

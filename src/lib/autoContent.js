@@ -24,6 +24,12 @@ export async function refreshAutoContent() {
 }
 
 export function startAutoContent() {
+  const obsolete = state.posts.filter(post => /^nih-reel-/.test(post.id || ''));
+  if (obsolete.length) {
+    state.posts = state.posts.filter(post => !/^nih-reel-/.test(post.id || ''));
+    persist();
+    document.dispatchEvent(new CustomEvent('content:auto-updated'));
+  }
   void refreshAutoContent();
   window.setInterval(() => {
     if (document.visibilityState === 'visible') void refreshAutoContent();

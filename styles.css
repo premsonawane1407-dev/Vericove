@@ -1176,6 +1176,47 @@ body{background:#fff;color:var(--ink)}
 .vc-auto-reel-art>small{position:relative;color:#d4ccd5b8;font-size:10px}
 @keyframes auto-reel-drift{from{transform:translate3d(0,-9px,0) rotate(-8deg)}to{transform:translate3d(-14px,14px,0) rotate(6deg)}}
 @media(prefers-reduced-motion:reduce){.vc-auto-reel-orbit{animation:none}}
+
+/* User-selected dark appearance */
+html[data-theme="dark"]{color-scheme:dark;--ink:#f0edf1;--sub:#c0bac3;--quiet:#a39ca7;--line:#39353d;--paper:#201e23;--wash:#151419;--plum:#cbb4d2;--plum2:#b39aba;--rose:#382d35;--sage:#29352f;--butter:#38332a;--blue:#29333a;--shadow:0 12px 36px #0005;background:#151419;color:var(--ink)}
+html[data-theme="dark"] body{background:var(--wash);color:var(--ink)}
+html[data-theme="dark"] .app-shell,html[data-theme="dark"] .page,html[data-theme="dark"] .vc-app[data-community-page],html[data-theme="dark"] .vc-page-body{background:var(--wash);color:var(--ink)}
+html[data-theme="dark"] .sidebar,html[data-theme="dark"] .vc-app[data-community-page]>.sidebar{background:#19171c;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .topbar,html[data-theme="dark"] .vc-topbar{background:#19171ceF;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .breadcrumb,html[data-theme="dark"] .page-heading p,html[data-theme="dark"] .nav-item,html[data-theme="dark"] .vc-author small,html[data-theme="dark"] .vc-dm-thread-copy small{color:var(--sub)}
+html[data-theme="dark"] .breadcrumb strong,html[data-theme="dark"] .page-heading h1,html[data-theme="dark"] .nav-item.active,html[data-theme="dark"] .card-head h2,html[data-theme="dark"] .card-head h3{color:var(--ink)}
+html[data-theme="dark"] .nav-item:hover,html[data-theme="dark"] .nav-item.active{background:#302a33;color:#eee5f0}
+html[data-theme="dark"] .card,html[data-theme="dark"] .paper,html[data-theme="dark"] .post-card,html[data-theme="dark"] .entry-card,html[data-theme="dark"] .record-card,html[data-theme="dark"] .settings-card,html[data-theme="dark"] .settings-account-card,html[data-theme="dark"] .vc-post,html[data-theme="dark"] .vc-community-tile,html[data-theme="dark"] .vc-profile-page,html[data-theme="dark"] .vc-dm-list,html[data-theme="dark"] .vc-dm-chat,html[data-theme="dark"] .vc-dm-thread,html[data-theme="dark"] .vc-mini-community,html[data-theme="dark"] .vc-side-block,html[data-theme="dark"] .vc-gentle-note,html[data-theme="dark"] .vc-composer,html[data-theme="dark"] .vc-feed-toolbar{background:#201e23;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .vc-post-copy,html[data-theme="dark"] .post-body,html[data-theme="dark"] .entry-note,html[data-theme="dark"] .record-desc,html[data-theme="dark"] .vc-mini-community small,html[data-theme="dark"] .vc-story,html[data-theme="dark"] .vc-notification{color:var(--sub)}
+html[data-theme="dark"] input,html[data-theme="dark"] textarea,html[data-theme="dark"] select,html[data-theme="dark"] .global-search,html[data-theme="dark"] .vc-global-search,html[data-theme="dark"] .vc-explore-search,html[data-theme="dark"] .vc-dm-search,html[data-theme="dark"] .care-search{background:#19171c;border-color:#403b44;color:var(--ink)}
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#99919d}
+html[data-theme="dark"] .btn,html[data-theme="dark"] .round-btn,html[data-theme="dark"] .vc-icon-button,html[data-theme="dark"] .vc-soft-button{background:#28252b;border-color:#403b44;color:#e4dce7}
+html[data-theme="dark"] .btn.soft,html[data-theme="dark"] .vc-auto-content-label{background:#342d37;border-color:#514757;color:#e0cde5}
+html[data-theme="dark"] .vc-post-actions button,html[data-theme="dark"] .vc-feed-toolbar button,html[data-theme="dark"] .vc-dm-chat-tools button{color:#d8d0dc}
+html[data-theme="dark"] .vc-auto-source{background:#27232a;border-color:#453d49}
+html[data-theme="dark"] .vc-auto-source a,html[data-theme="dark"] .vc-auto-source span{color:#d5cad9}
+html[data-theme="dark"] .vc-dock{background:#201e23;border-color:#403b44;box-shadow:0 12px 36px #0006}
+html[data-theme="dark"] .vc-dock>button{color:#c6bdc9}
+html[data-theme="dark"] .vc-dock>button.active{background:#3b3240;color:#f2e8f4}
+html[data-theme="dark"] .vc-messages .vc-dm-chat-head,html[data-theme="dark"] .vc-dm-compose,html[data-theme="dark"] .vc-dm-inbox-tabs,html[data-theme="dark"] .vc-dm-stories{background:#201e23;border-color:var(--line)}
+html[data-theme="dark"] .vc-dm-bubble{background:#302c33;color:#f0edf1}
+html[data-theme="dark"] .vc-dm-bubble.mine{background:#55465b;color:#fff}
+html[data-theme="dark"] .vc-community-detail,html[data-theme="dark"] .vc-explore-page,html[data-theme="dark"] .vc-communities-page,html[data-theme="dark"] .vc-notifications,html[data-theme="dark"] .vc-profile-page{color:var(--ink)}
+html[data-theme="dark"] .vc-communities-search .vc-explore-search,html[data-theme="dark"] .vc-explore-search,html[data-theme="dark"] .vc-discovery-community{background:#201e23;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .vc-story-ring,html[data-theme="dark"] .vc-story-ring>span{background:#26232a;border-color:#49404d}
+html[data-theme="dark"] .mobile-nav{background:#201e23ed;border-color:var(--line)}
+html[data-theme="dark"] .modal-root{background:#050407b8}
+html[data-theme="dark"] .modal{background:#211f24;color:var(--ink);border:1px solid var(--line)}
+html[data-theme="dark"] .modal-head h2,html[data-theme="dark"] .modal-intro,html[data-theme="dark"] .modal .topic strong,html[data-theme="dark"] .modal .topic small{color:var(--ink)}
+html[data-theme="dark"] .vc-reel-rail button{color:#d9d1dd}
+html[data-theme="dark"] .vc-reel-rail button span{color:#c0b7c4}
+html[data-theme="dark"] .settings-toggle-row,html[data-theme="dark"] .privacy-row{border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .settings-toggle-row small,html[data-theme="dark"] .privacy-row small,html[data-theme="dark"] .privacy-footnote,html[data-theme="dark"] .settings-storage-note{color:#bcb4c0}
+html[data-theme="dark"] .settings-switch{background:#4a454d;border-color:#5f5862}
+html[data-theme="dark"] .settings-switch:checked{background:#886d91;border-color:#886d91}
+html[data-theme="dark"] .settings-switch:after{background:#f8f5f8}
+html[data-theme="dark"] .profile-private-note,html[data-theme="dark"] .auth-notice{color:#bcb4c0}
+@media(prefers-reduced-motion:reduce){html[data-theme="dark"] *,html[data-theme="dark"] *::before,html[data-theme="dark"] *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 @media(max-width:820px){.vc-app.vc-reels-open>.vc-page-body.vc-reels-body{padding:0 4px 80px}.vc-app.vc-reels-open .vc-reel-feed{--reel-height:min(88dvh,calc(100dvh - 136px),920px);padding:0}.vc-reel-media{width:min(calc(var(--reel-height)*var(--reel-ratio)),calc(100vw - 128px));max-width:calc(100vw - 128px)}.vc-reel-rail{gap:8px}.vc-reel-rail button,.vc-reel-rail button:hover{min-width:39px;min-height:42px}.vc-app.vc-messages-open>.vc-page-body.vc-messages-body{padding:6px 8px 90px}.vc-dm-chat{min-height:0}}
 @media(max-width:620px){.vc-app[data-community-page].vc-reels-open,.vc-app[data-community-page].vc-messages-open{grid-template-rows:52px minmax(0,1fr)}.vc-app.vc-reels-open>.vc-topbar,.vc-app.vc-messages-open>.vc-topbar{height:52px;min-height:52px}.vc-app.vc-reels-open>.vc-page-body.vc-reels-body{height:calc(100dvh - 52px);padding:0 2px 78px}.vc-app.vc-reels-open .vc-reel-feed{--reel-height:min(86dvh,calc(100dvh - 130px),840px)}.vc-reel-media{width:min(calc(var(--reel-height)*var(--reel-ratio)),calc(100vw - 110px));max-width:calc(100vw - 110px);border-radius:12px}.vc-reel-feed .vc-reel-card{gap:5px}.vc-reel-rail{gap:5px}.vc-reel-rail button,.vc-reel-rail button:hover{min-width:36px;min-height:39px}.vc-reel-rail button svg{width:19px;height:19px}.vc-reel-rail button span{font-size:9px}.vc-reel-rail .vc-reel-sound span{font-size:8px}.vc-app.vc-messages-open>.vc-page-body.vc-messages-body{height:calc(100dvh - 52px);padding:5px 5px 84px}.vc-messages.vc-dm-app{min-height:0}.vc-dm-chat{min-height:0}}
 
@@ -1257,3 +1298,44 @@ body.modal-open{overflow:hidden}
 @media(max-width:390px){.health-tabs button{padding-inline:10px;font-size:11px}.health-side-col{grid-template-columns:1fr}.health-resource-links{grid-template-columns:1fr}.health-resource-links button{grid-template-columns:24px 1fr;min-height:68px}.health-resource-links button>span{grid-row:span 2}.health-entry{gap:6px}.health-entry-icon{height:30px;width:30px}.health-icon-btn{width:30px}}
 @media(prefers-reduced-motion:reduce){.mira-flower{animation:none}}
 @media print{.sidebar,.topbar,.mobile-nav,.health-tabs,.conversation-heading,.health-notice,.mira-input-actions,.modal-root{display:none!important}.page{padding:0}.health-conversation{max-width:none;border:0;box-shadow:none}.mira-question{display:none}}
+
+/* Final theme overrides keep later page-specific rules in both palettes. */
+.vc-source-video{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:#111}
+.vc-source-video iframe{display:block;width:100%;height:100%;border:0}
+.vc-reel-media iframe.vc-reel-embed{display:block;width:100%;height:100%;border:0;background:#111;object-fit:contain}
+.vc-source-badge{margin-left:auto;padding:6px 9px;border:1px solid #ffffff70;border-radius:999px;background:#17141a8c;color:#fff;text-decoration:none;font-size:10px;font-weight:700;white-space:nowrap}
+html[data-theme="dark"]{color-scheme:dark;--ink:#f0edf1;--sub:#c0bac3;--quiet:#a39ca7;--line:#39353d;--paper:#201e23;--wash:#151419;--plum:#cbb4d2;--plum2:#b39aba;--rose:#382d35;--sage:#29352f;--butter:#38332a;--blue:#29333a;--shadow:0 12px 36px #0005;background:#151419;color:var(--ink)}
+html[data-theme="dark"] body,html[data-theme="dark"] .app-shell,html[data-theme="dark"] .page,html[data-theme="dark"] .vc-app[data-community-page],html[data-theme="dark"] .vc-page-body{background:var(--wash);color:var(--ink)}
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] strong,html[data-theme="dark"] .card-head h2,html[data-theme="dark"] .card-head h3,html[data-theme="dark"] .vc-post-title,html[data-theme="dark"] .vc-mini-community strong{color:var(--ink)}
+html[data-theme="dark"] .sidebar,html[data-theme="dark"] .vc-app[data-community-page]>.sidebar{background:#19171c;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .topbar,html[data-theme="dark"] .vc-topbar{background:#19171ceF;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .card,html[data-theme="dark"] .paper,html[data-theme="dark"] .post-card,html[data-theme="dark"] .settings-card,html[data-theme="dark"] .settings-account-card,html[data-theme="dark"] .vc-post,html[data-theme="dark"] .vc-community-tile,html[data-theme="dark"] .vc-profile-page,html[data-theme="dark"] .vc-dm-list,html[data-theme="dark"] .vc-dm-chat,html[data-theme="dark"] .vc-dm-thread,html[data-theme="dark"] .vc-mini-community,html[data-theme="dark"] .vc-side-block,html[data-theme="dark"] .vc-gentle-note,html[data-theme="dark"] .vc-composer,html[data-theme="dark"] .vc-feed-toolbar,html[data-theme="dark"] .health-stat-panel,html[data-theme="dark"] .health-side-note,html[data-theme="dark"] .health-insight-card,html[data-theme="dark"] .health-entry,html[data-theme="dark"] .health-conversation,html[data-theme="dark"] .health-resource-links button{background:#201e23;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .vc-post-copy,html[data-theme="dark"] .post-body,html[data-theme="dark"] .entry-note,html[data-theme="dark"] .record-desc,html[data-theme="dark"] .card-head p,html[data-theme="dark"] .page-heading p,html[data-theme="dark"] .health-entry-copy>p,html[data-theme="dark"] .health-insight-card>p,html[data-theme="dark"] .vc-mini-community small{color:var(--sub)}
+html[data-theme="dark"] input,html[data-theme="dark"] textarea,html[data-theme="dark"] select,html[data-theme="dark"] .global-search,html[data-theme="dark"] .vc-global-search,html[data-theme="dark"] .vc-explore-search,html[data-theme="dark"] .vc-dm-search,html[data-theme="dark"] .care-search,html[data-theme="dark"] .health-journal-tools select{background:#19171c;border-color:#403b44;color:var(--ink)}
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#aaa2ae}
+html[data-theme="dark"] .btn,html[data-theme="dark"] .round-btn,html[data-theme="dark"] .vc-icon-button,html[data-theme="dark"] .vc-soft-button{background:#28252b;border-color:#403b44;color:#e4dce7}
+html[data-theme="dark"] .vc-auto-source,html[data-theme="dark"] .health-storage-note,html[data-theme="dark"] .mira-answer,html[data-theme="dark"] .health-empty{background:#27232a;border-color:#453d49;color:#e0d9e2}
+html[data-theme="dark"] .vc-auto-source a,html[data-theme="dark"] .vc-auto-source span,html[data-theme="dark"] .settings-toggle-row small,html[data-theme="dark"] .privacy-row small,html[data-theme="dark"] .privacy-footnote,html[data-theme="dark"] .settings-storage-note{color:#c9c1cc}
+html[data-theme="dark"] .vc-dock{background:#201e23;border-color:#403b44;box-shadow:0 12px 36px #0006}
+html[data-theme="dark"] .vc-dock>button{color:#c6bdc9}
+html[data-theme="dark"] .vc-dock>button.active,html[data-theme="dark"] .nav-item.active{background:#3b3240;color:#f2e8f4}
+html[data-theme="dark"] .vc-messages .vc-dm-chat-head,html[data-theme="dark"] .vc-dm-compose,html[data-theme="dark"] .vc-dm-inbox-tabs,html[data-theme="dark"] .vc-dm-stories{background:#201e23;border-color:var(--line)}
+html[data-theme="dark"] .vc-dm-bubble{background:#302c33;color:#f0edf1}
+html[data-theme="dark"] .vc-dm-bubble.mine{background:#55465b;color:#fff}
+html[data-theme="dark"] .vc-communities-search .vc-explore-search,html[data-theme="dark"] .vc-discovery-community{background:#201e23;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .vc-story-ring,html[data-theme="dark"] .vc-story-ring>span{background:#26232a;border-color:#49404d}
+html[data-theme="dark"] .mobile-nav{background:#201e23ed;border-color:var(--line)}
+html[data-theme="dark"] .modal-root{background:#050407b8}
+html[data-theme="dark"] .modal,html[data-theme="dark"] .explore-detail-sheet{background:#211f24;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .vc-explore-post-card,html[data-theme="dark"] .vc-explore-modal-comments,html[data-theme="dark"] .vc-explore-modal-comments .thread-list,html[data-theme="dark"] .vc-explore-modal-comments .comment-form{background:#211f24;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .vc-explore-post-info>p,html[data-theme="dark"] .vc-explore-like-count,html[data-theme="dark"] .vc-explore-modal-comments .thread-comment-copy>p{color:#d6ced9}
+html[data-theme="dark"] .vc-reel-rail button{color:#e1d9e5}
+html[data-theme="dark"] .vc-reel-rail button span{color:#cbc2ce}
+html[data-theme="dark"] .settings-toggle-row,html[data-theme="dark"] .privacy-row{border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .settings-switch{background:#4a454d;border-color:#5f5862}
+html[data-theme="dark"] .settings-switch:checked{background:#886d91;border-color:#886d91}
+html[data-theme="dark"] .settings-switch:after{background:#f8f5f8}
+html[data-theme="dark"] .landing,html[data-theme="dark"] .landing-modules,html[data-theme="dark"] .auth-shell,html[data-theme="dark"] .auth-panel{background:var(--wash);color:var(--ink)}
+html[data-theme="dark"] .landing-header,html[data-theme="dark"] .module-card,html[data-theme="dark"] .auth-box,html[data-theme="dark"] .health-modal{background:#201e23;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .landing-hero,html[data-theme="dark"] .auth-art,html[data-theme="dark"] .dashboard-banner,html[data-theme="dark"] .mira-hero{background:#28242d;border-color:#413947;color:var(--ink)}
+@media(prefers-reduced-motion:reduce){html[data-theme="dark"] *,html[data-theme="dark"] *::before,html[data-theme="dark"] *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
