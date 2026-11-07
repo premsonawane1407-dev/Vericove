@@ -86,3 +86,10 @@
   .mira-other-tools{display:grid;gap:0}
 }
 @media(prefers-reduced-motion:reduce){.mira-option,.mira-icon-control{transition:none}}
+
+.talk-mira-entry{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:18px;margin:10px 0 48px;padding:20px 24px;border:1px solid #e5d8e3;border-radius:18px;background:linear-gradient(112deg,#f5edf3 0%,#fbf8f8 56%,#f6eff3 100%)}
+.talk-mira-entry-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;color:#735a73;background:#e8dce7}
+.talk-mira-entry h2{margin:4px 0 0;color:#332c35;font:500 20px/1.2 Manrope,sans-serif;letter-spacing:-.45px}
+.talk-mira-entry p{margin:6px 0 0;color:#716974;font-size:12px;line-height:1.6}
+.talk-mira-entry .btn{min-height:44px;gap:10px;border-radius:10px;padding-inline:16px;white-space:nowrap}
+@media(max-width:700px){.talk-mira-entry{grid-template-columns:40px minmax(0,1fr);gap:13px;margin:8px 0 34px;padding:16px}.talk-mira-entry-mark{width:38px;height:38px}.talk-mira-entry h2{font-size:18px}.talk-mira-entry p{font-size:11px}.talk-mira-entry .btn{grid-column:1/-1;justify-content:center;width:100%}}

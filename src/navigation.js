@@ -9,7 +9,7 @@ const navGroups = [
 
 export function workspaceSidebar() {
   const role = user().role;
-  const normalizedRoute = ['care', 'research', 'matches'].includes(state.route) ? 'discover' : ['health-journal','health-insights','health-records','health-conversation','timeline', 'records', 'medications', 'reports'].includes(state.route) ? 'my-health' : ['professional', 'verification', 'notifications'].includes(state.route) ? 'profile' : state.route;
+  const normalizedRoute = ['care', 'research', 'matches'].includes(state.route) ? 'discover' : ['health-journal','health-insights','health-records','health-conversation','talk-to-mira','timeline', 'records', 'medications', 'reports'].includes(state.route) ? 'my-health' : ['professional', 'verification', 'notifications'].includes(state.route) ? 'profile' : state.route;
   const groups = navGroups.filter(group => !group.roles || group.roles.includes(role)).map(group => {
     const items = group.items.filter(([id]) => !['doctor', 'researcher'].includes(role) || !['my-health', 'discover'].includes(id));
     return `<div class="nav-label">${group.label}</div><div class="nav-list">${items.map(([id, label, icon]) => `<button class="nav-item ${normalizedRoute === id ? 'active' : ''}" title="${label}" data-route="${id}" ${normalizedRoute === id ? 'aria-current="page"' : ''}><span class="nav-icon" aria-hidden="true">${svg(icon)}</span><span>${label}</span>${id === 'my-health' && state.entries.length ? `<b class="nav-meta">${state.entries.length}</b>` : ''}</button>`).join('')}</div>${group.label === 'Workspace' ? '<div class="nav-separator"></div>' : ''}`;

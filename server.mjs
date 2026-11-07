@@ -1,6 +1,7 @@
-import { createServer } from 'vite';
-import { autoContentPlugin } from './server/autoContentService.mjs';
+import { createServer, loadEnv } from 'vite';
 const port = Number(process.env.PORT || 4173);
-const server = await createServer({ plugins: [autoContentPlugin()], server: { host: '127.0.0.1', port } });
+const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
+if (!process.env.GEMINI_API_KEY && env.GEMINI_API_KEY) process.env.GEMINI_API_KEY = env.GEMINI_API_KEY;
+const server = await createServer({ server: { host: '127.0.0.1', port } });
 await server.listen();
 server.printUrls();
