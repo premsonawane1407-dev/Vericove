@@ -55,6 +55,10 @@
 .summary-ai-status strong{display:block;color:#514258;font-size:14px}
 .summary-ai-status p{margin:6px 0 0;color:#625e66;font-size:13px;line-height:1.55}
 .health-review .health-disclaimer{font-size:13px;line-height:1.55}
+.mira-hero-copy .symptom-check-in{min-height:44px;gap:8px;border:1px solid rgba(112,84,120,.18);background:rgba(255,255,255,.62);color:#67516e;box-shadow:inset 0 1px rgba(255,255,255,.84);transition:transform .2s cubic-bezier(.2,.8,.2,1),background-color .2s,border-color .2s}
+.mira-hero-copy .symptom-check-in:hover{transform:translateY(-1px);border-color:rgba(112,84,120,.34);background:rgba(255,255,255,.9)}
+.mira-hero-copy .symptom-check-in:focus-visible{outline:3px solid #c6afd0;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.mira-hero-copy .symptom-check-in{transition:none}}
 
 /* Optional, consent-led PubMed + Gemini evidence explorer */
 .symptom-research{position:relative;isolation:isolate;overflow:hidden;margin:22px 0 18px;padding:22px;border:1px solid rgba(123,102,132,.18);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(248,244,250,.62));-webkit-backdrop-filter:blur(18px) saturate(1.18);backdrop-filter:blur(18px) saturate(1.18);box-shadow:0 12px 34px rgba(62,43,69,.045),inset 0 1px 0 rgba(255,255,255,.82);animation:research-surface-in .48s cubic-bezier(.2,.75,.25,1) both;}

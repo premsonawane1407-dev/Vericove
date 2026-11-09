@@ -60,8 +60,9 @@ export function getChatWallpaper(conversationId) {
 }
 
 export function chatWallpaperLayer(wallpaper, className = 'vc-chat-wallpaper-video') {
+  const reducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   return wallpaper?.type === 'video'
-    ? `<video class="${className}" src="${wallpaper.src}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>`
+    ? `<video class="${className}" src="${wallpaper.src}" ${reducedMotion ? '' : 'autoplay'} muted loop playsinline preload="metadata" aria-hidden="true"></video>`
     : '';
 }
 

@@ -67,7 +67,7 @@ function MiraDialoguePanel() {
   return `<section class="tm-dialogue" aria-label="Conversation with Mira">
     <div class="tm-dialogue-head"><div><span class="tm-kicker">A QUIET SPACE TO TALK</span><p>Share what feels right. We can take it one thought at a time.</p></div></div>
     ${configured === false ? `<div class="tm-inline-status" role="status"><span>Gemini isn’t connected right now. You can still write a message and try again.</span><button type="button" data-tm-action="reconnect">Reconnect</button></div>` : ''}
-    <div class="tm-transcript" data-tm-transcript role="region" aria-label="Conversation history">${formatConversation()}<div class="tm-end-anchor" data-tm-end></div></div><span class="tm-sr-only" aria-live="polite" aria-atomic="true">${esc(pendingAnnouncement)}</span>
+    <div class="tm-transcript" data-tm-transcript role="region" aria-label="Conversation history">${chatWallpaperLayer(getChatWallpaper('talk-to-mira'), 'tm-wallpaper-video')}${formatConversation()}<div class="tm-end-anchor" data-tm-end></div></div><span class="tm-sr-only" aria-live="polite" aria-atomic="true">${esc(pendingAnnouncement)}</span>
     ${errorMessage ? `<div class="tm-error" role="alert"><p>${esc(errorMessage)}</p><button type="button" data-tm-action="retry">Try again</button></div>` : ''}
     ${revealIndex >= 0 ? '<button type="button" class="tm-reveal-button" data-tm-action="skip-reveal">Show full response</button>' : ''}
     ${transcript.length === 1 ? `<div class="tm-suggestions" aria-label="Ideas to begin">${suggestions.map((text, i) => `<button type="button" class="tm-suggestion" data-tm-suggestion="${i}">${esc(text)} <span aria-hidden="true">↗</span></button>`).join('')}</div>` : ''}
@@ -97,7 +97,6 @@ export function talkToMiraPage(returnRoute = 'my-health') {
   const wallpaperStyle = getChatWallpaperStyle('talk-to-mira');
   const wallpaper = getChatWallpaper('talk-to-mira');
   return `<div class="talk-to-mira" data-chat-theme="${appearance.theme}" data-chat-wallpaper="${appearance.wallpaper}" style="${wallpaperStyle}" aria-label="Talk to Mira conversation">
-    ${chatWallpaperLayer(wallpaper, 'tm-wallpaper-video')}
     <button class="tm-backdrop" type="button" data-route="${esc(returnRoute)}" aria-label="Close Talk to Mira"></button>
     <div class="tm-ambient tm-ambient-one" aria-hidden="true"></div><div class="tm-ambient tm-ambient-two" aria-hidden="true"></div><div class="tm-grain" aria-hidden="true"></div>
     <section class="tm-window" role="dialog" aria-modal="true" aria-labelledby="tm-title" tabindex="-1">

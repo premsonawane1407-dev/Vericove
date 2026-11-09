@@ -3,6 +3,7 @@ import { autoContentPlugin } from './server/autoContentService.mjs';
 import { miraTtsPlugin } from './server/miraTtsService.mjs';
 import { miraChatPlugin } from './server/miraChatService.mjs';
 import { symptomIntelligencePlugin } from './server/symptomIntelligenceService.mjs';
+import { researchAnalysisPlugin } from './server/researchAnalysisService.mjs';
 
 const previewWithMiddleware = plugin => ({
   ...plugin,
@@ -19,7 +20,8 @@ export default defineConfig(({ mode }) => {
   const miraTts = miraTtsPlugin();
   const miraChat = miraChatPlugin();
   const symptomIntelligence = symptomIntelligencePlugin();
+  const researchAnalysis = researchAnalysisPlugin();
   return {
-    plugins: [previewWithMiddleware(autoContent), previewWithMiddleware(miraTts), previewWithMiddleware(miraChat), previewWithMiddleware(symptomIntelligence)],
+    plugins: [previewWithMiddleware(autoContent), previewWithMiddleware(miraTts), previewWithMiddleware(miraChat), previewWithMiddleware(symptomIntelligence), previewWithMiddleware(researchAnalysis)],
   };
 });

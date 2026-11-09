@@ -245,6 +245,7 @@ function onAction(button){const action=button.dataset.action,id=button.dataset.i
   case 'attach-story':$('#story-media')?.click();break;
   case 'remove-photo':if(selectedMedia?.url)URL.revokeObjectURL(selectedMedia.url);selectedMedia=null;$('#media-preview').innerHTML='';$('#media-preview').hidden=true;$('#post-photo').value='';break;
   case 'close-modal':dismissModal();break;
+  case 'dismiss-analysis':{const results=$('#analysis-results');if(results){results.hidden=true;results.innerHTML='';}break;}
   case 'vote':if(post){const previous=post.vote||(post.voted?1:0),next=Number(button.dataset.vote);post.vote=previous===next?0:next;post.voted=post.vote===1;post.votes+=post.vote-previous;persist();render()}break;
   case 'save-post':if(post){post.saved=!post.saved;persist();render();toast(post.saved?'Saved to your discussions':'Removed from saved discussions')}break;
   case 'toggle-comments':{const card=button.closest('[data-reel-card]'),postCard=button.closest('.vc-post');if(card)openComments(post,card);else if(postCard)toggleFypComments(post,postCard);else openComments(post);break;}
@@ -367,14 +368,46 @@ document.addEventListener('click',event=>{
   if(communityView){renderCommunityFeed(communityView.dataset.communityView);return;}
   const researchTab=event.target.closest('[data-research-tab]');
   if(researchTab){$$('[data-research-tab]').forEach(button=>button.classList.toggle('active',button===researchTab));const topic=researchTab.dataset.researchTab;const set=topic==='All research'?papers():topic==='My saved'?papers().filter(paper=>state.savedPapers.includes(paper.id)):papers().filter(paper=>paper.topic===topic);const list=$('#paper-list');if(list)list.innerHTML=set.map(paperCard).join('')||emptyState(topic==='My saved'?'No saved items yet':'No sample items in this topic','Save an item or try another research topic.');return;}
+  const analysisMode=event.target.closest('[data-analysis-mode]');
+  if(analysisMode){$$('[data-analysis-mode]').forEach(button=>{const active=button===analysisMode;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});const mode=$('#analysis-search [name="mode"]');if(mode)mode.value=analysisMode.dataset.analysisMode;return;}
+  const analysisPrompt=event.target.closest('[data-analysis-prompt]');
+  if(analysisPrompt){const input=$('#analysis-question');if(input){input.value=analysisPrompt.dataset.analysisPrompt;input.focus();}return;}
+  const analysisFeedback=event.target.closest('[data-analysis-feedback]');
+  if(analysisFeedback){const group=analysisFeedback.closest('.analysis-feedback');group?.querySelectorAll('[data-analysis-feedback]').forEach(button=>{const selected=button===analysisFeedback;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected));});const note=group?.querySelector('small');if(note)note.textContent='Thanks — your response was noted on this screen.';return;}
   const careFilter=event.target.closest('[data-care-filter]');
   if(careFilter){$$('[data-care-filter]').forEach(button=>button.classList.toggle('active',button===careFilter));const filter=careFilter.dataset.careFilter.toLowerCase();$$('[data-doctor]').forEach(card=>card.hidden=filter!=='all providers'&&!card.dataset.doctor.includes(filter));return;}
   const journalFilter=event.target.closest('[data-filter]');
   if(journalFilter){$$('[data-filter]').forEach(button=>button.classList.toggle('active',button===journalFilter));const key=journalFilter.dataset.filter;const entries=key==='Notes'?state.entries.filter(entry=>entry.note):key==='Medication'?[]:state.entries;const list=$('.entry-list');if(list)list.innerHTML=entries.map(entry=>`<article class="entry"><span class="entry-icon">${svg('pulse',15)}</span><div class="entry-main"><div class="entry-title">${esc(entry.symptom)}</div><div class="entry-meta">${fmtDate(entry.date)}${entry.time?` · ${esc(entry.time)}`:''} · ${esc(entry.duration||'Duration not recorded')}</div>${entry.note?`<div class="entry-note">${esc(entry.note)}</div>`:''}</div><div class="entry-side"><span class="severity ${entry.severity.toLowerCase()}">${esc(entry.severity)}</span></div></article>`).join('')||emptyState(key==='Medication'?'No medication notes yet':'No notes in this view','Add a journal entry when you would like to capture something.');return;}
 });
 
+async function runResearchAnalysis(form){
+  const question=String(new FormData(form).get('question')||'').trim();
+  const mode=String(new FormData(form).get('mode')||'research-intelligence');
+  const consentAccepted=new FormData(form).get('consentAccepted')==='on';
+  const results=$('#analysis-results');
+  const submit=form.querySelector('[type="submit"]');
+  if(!results||!submit||!question)return;
+  const original=submit.innerHTML;
+  submit.disabled=true;submit.setAttribute('aria-busy','true');submit.innerHTML='<span class="analysis-spinner" aria-hidden="true"></span> Searching PubMed…';
+  results.hidden=false;results.className='analysis-results is-loading';results.textContent='Searching public research and checking available abstracts…';
+  try{
+    const response=await fetch('/api/research-analysis',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question,mode,consentAccepted})});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.error||'Research could not be prepared right now. Please try again.');
+    const articles=Array.isArray(data.articles)?data.articles:[];
+    const citation=(text)=>esc(text||'').replace(/\[PMID\s+(\d+)\]/gi,(match,id)=>articles.some(article=>article.pmid===id)?`<a class="analysis-citation" href="https://pubmed.ncbi.nlm.nih.gov/${id}/" target="_blank" rel="noopener noreferrer">[PMID ${id}]</a>`:match);
+    const sources=articles.length?`<section class="analysis-sources" aria-label="Retrieved PubMed sources"><div class="analysis-sources-title">${svg('book',14)} <span>Sources from PubMed</span><small>${articles.length} ${articles.length===1?'study':'studies'}</small></div>${articles.map(article=>{const id=/^\d{1,12}$/.test(String(article.pmid))?article.pmid:'';if(!id)return '';return `<a class="analysis-source" href="https://pubmed.ncbi.nlm.nih.gov/${id}/" target="_blank" rel="noopener noreferrer"><span class="analysis-source-icon">${svg('file',14)}</span><span><strong>${esc(article.title)}</strong><small>${esc(article.journal||'Journal not listed')}${article.year?` · ${esc(article.year)}`:''} · PMID ${id}</small></span><span class="analysis-source-arrow" aria-hidden="true">↗</span></a>`;}).join('')}</section>`:'';
+    results.className='analysis-results';
+    results.innerHTML=`<div class="analysis-result-top"><span class="analysis-result-icon">${svg('spark',15)}</span><span class="overline">${data.analysis?'EVIDENCE OVERVIEW':'SEARCH RESULTS'}</span><button type="button" class="analysis-dismiss" data-action="dismiss-analysis" aria-label="Close research results">×</button></div>${data.analysis?`<h3>What the evidence says so far</h3><p class="analysis-copy">${citation(data.analysis).replace(/\n/g,'<br>')}</p>`:`<h3>${articles.length?'Your source set is ready':'No close matches found'}</h3><p class="analysis-copy">${articles.length?'AI summaries are not connected in this environment. You can still open the source records below.':'Try a broader topic or different wording. A search result is not a measure of how common or important a health concern is.'}</p>`}${sources}${data.limitation?`<div class="analysis-limitation">${svg('shield',14)}<p><strong>Keep the context</strong>${esc(data.limitation)}</p></div>`:''}<div class="analysis-feedback"><span>Was this useful?</span><button type="button" data-analysis-feedback="yes" aria-pressed="false">Yes</button><button type="button" data-analysis-feedback="not-yet" aria-pressed="false">Not yet</button><small></small></div><p class="analysis-disclaimer">Educational research context only · not a diagnosis or personal care recommendation.</p>`;
+  }catch(error){
+    results.className='analysis-results analysis-error';
+    results.innerHTML=`<div class="analysis-result-top"><span class="overline">RESEARCH UNAVAILABLE</span><button type="button" class="analysis-dismiss" data-action="dismiss-analysis" aria-label="Close message">×</button></div><p class="analysis-copy">${esc(error.message||'Research could not be prepared right now. Please try again.')}</p>`;
+  }finally{submit.disabled=false;submit.removeAttribute('aria-busy');submit.innerHTML=original;}
+}
+
 document.addEventListener('submit',event=>{
   const form=event.target;
+  if(form.matches('#analysis-search')){event.preventDefault();runResearchAnalysis(form);return;}
   if(form.matches('[data-story-reply]')){event.preventDefault();const text=String(new FormData(form).get('reply')||'').trim();if(!text)return;startRequest(form.dataset.storyAuthor,text).then(()=>{form.reset();toast('Message request sent');}).catch(error=>toast(error.message||'Could not send your story reply'));return;}
   if(form.matches('[data-dm-request-form]')){event.preventDefault();const data=new FormData(form),handle=String(data.get('handle')||'').trim(),text=String(data.get('message')||'').trim();if(!handle){toast('Choose a member who accepts message requests');return;}if(!text){toast('Write a short introduction first');return;}const submit=form.querySelector('[type="submit"]');if(submit)submit.disabled=true;startRequest(handle,text).then(conversationId=>{dismissModal();state.activeDm=conversationId;state.dmFolder='all';state.dmShowList=false;return loadInbox();}).then(inbox=>{state.dmConversations=inbox.conversations;state.activeDm=state.dmConversations.find(item=>item.id===state.activeDm)?.id||state.dmConversations[0]?.id;render();loadActiveDm();toast('Message request sent');}).catch(error=>{if(submit)submit.disabled=false;toast(error.message||'Could not send the request');});return;}
   if(form.matches('[data-dm-compose]')){event.preventDefault();const text=String(new FormData(form).get('message')||'').trim(),thread=state.dmConversations?.find(item=>item.id===state.activeDm);if(!text||!thread)return;setDraft(thread.id,'');if(thread.demo){appendSampleDmMessage(thread,text);render();playUiSound('send');const activeId=thread.id;window.setTimeout(()=>{const current=state.dmConversations?.find(item=>item.id===activeId);if(!current?.demo)return;appendSampleDmMessage(current,'Thanks for sharing that with me. What feels most important for you right now?','them');render();playUiSound('receive');},1100);return;}const replyTo=state.dmReplyTo||null;state.dmReplyTo=null;state.dmReplyPreview='';sendMessage(thread.id,text,replyTo).then(()=>playUiSound('send')).catch(error=>toast(error.message||'Message could not be sent'));return;}

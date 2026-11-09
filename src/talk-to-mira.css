@@ -425,18 +425,18 @@ body.is-tm-open { overflow: hidden; }
 .talk-to-mira[data-chat-theme="ink"] .tm-message.from-you .tm-message-copy{background:#424248cc;border-color:#d2d2dc4a}
 @media(max-width:520px){.tm-appearance-panel{right:-5px;max-height:68dvh;padding:13px}.tm-appearance-themes{gap:5px}.tm-appearance-theme{min-height:52px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.chat-theme-choice,.tm-appearance-panel,.tm-appearance-theme{transition:none!important;animation:none!important}}
-.talk-to-mira .tm-wallpaper-video{position:absolute;z-index:1;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22;pointer-events:none}
+.talk-to-mira .tm-wallpaper-video{position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;opacity:.38;pointer-events:none}
 .tm-appearance-wallpapers>button{position:relative;min-height:52px;overflow:hidden}
 .tm-appearance-wallpapers>button.is-selected{border-color:#dcaec8;background:#dcaec81c;box-shadow:0 0 0 2px #dcaec823}
 .tm-appearance-wallpapers img,.tm-appearance-wallpapers video{width:54px;height:38px;flex:none;object-fit:cover;border-radius:6px}
 .tm-appearance-wallpapers .chat-wallpaper-motion{left:27px}
 .tm-plain-wallpaper{width:54px;height:38px;flex:none;border:1px solid #ffffff24;border-radius:6px;background:linear-gradient(135deg,#25252b 0 50%,#343039 50%)}
-@media(prefers-reduced-motion:reduce){.talk-to-mira .tm-wallpaper-video{display:none!important}}
+@media(prefers-reduced-motion:reduce){.talk-to-mira .tm-wallpaper-video{animation:none!important}}
 
 @media(max-width:680px){.tm-thinking{min-height:78px;gap:6px}.tm-thinking-avatar{width:78px;height:78px;flex-basis:78px}.tm-thinking-bubble{height:29px;margin-left:-21px;margin-top:-22px;padding-inline:9px}.tm-thinking small{font-size:10px}}
 
 /* The selected Mira theme now colors the complete conversation, not only the user bubble. */
-.talk-to-mira[data-chat-theme="light"]{--tm-theme-window:linear-gradient(145deg,#fbfafcf2,#f1edf3ef);--tm-theme-topbar:#f9f7f9d9;--tm-theme-dialogue:linear-gradient(90deg,#f6f2f7a8,#f2eef4b5);--tm-theme-bubble:#ffffffc9;--tm-theme-outgoing:#e9deeb;--tm-theme-text:#302b32;--tm-theme-outgoing-text:#403646;--tm-theme-muted:#766f7b;--tm-theme-border:#67596e24;--tm-theme-overlay:#faf7f9a6}
+.talk-to-mira[data-chat-theme="light"]{--tm-theme-window:linear-gradient(145deg,#fbfafcf2,#f1edf3ef);--tm-theme-topbar:#f9f7f9d9;--tm-theme-dialogue:linear-gradient(90deg,#f6f2f7a8,#f2eef4b5);--tm-theme-bubble:#ffffffc9;--tm-theme-outgoing:#e9deeb;--tm-theme-text:#302b32;--tm-theme-outgoing-text:#403646;--tm-theme-muted:#766f7b;--tm-theme-border:#67596e24;--tm-theme-overlay:#faf7f97a}
 .talk-to-mira[data-chat-theme="midnight"]{--tm-theme-window:linear-gradient(145deg,#1d1e22e8,#121316e8);--tm-theme-topbar:#13141785;--tm-theme-dialogue:linear-gradient(90deg,#231b2460,#211a226b);--tm-theme-bubble:#ffffff0b;--tm-theme-outgoing:#70576fcc;--tm-theme-text:#f5f1f5;--tm-theme-outgoing-text:#fff;--tm-theme-muted:#b9aab6;--tm-theme-border:#ffffff20;--tm-theme-overlay:#211a2278}
 .talk-to-mira[data-chat-theme="rose"]{--tm-theme-window:linear-gradient(145deg,#322229ed,#21191ff0);--tm-theme-topbar:#2b1c23c7;--tm-theme-dialogue:linear-gradient(90deg,#3b252d55,#251a215c);--tm-theme-bubble:#ffffff0c;--tm-theme-outgoing:#764655d9;--tm-theme-text:#fbf1f5;--tm-theme-outgoing-text:#fff;--tm-theme-muted:#d0b7c1;--tm-theme-border:#edb3c333;--tm-theme-overlay:#281d2378}
 .talk-to-mira[data-chat-theme="sage"]{--tm-theme-window:linear-gradient(145deg,#202923ee,#151a17ef);--tm-theme-topbar:#1b241fbd;--tm-theme-dialogue:linear-gradient(90deg,#26382d55,#1b241f5c);--tm-theme-bubble:#ffffff0c;--tm-theme-outgoing:#3d5846d9;--tm-theme-text:#f0f5f0;--tm-theme-outgoing-text:#fff;--tm-theme-muted:#b9c7bc;--tm-theme-border:#b1d0b533;--tm-theme-overlay:#1c251f75}
@@ -450,6 +450,9 @@ body.is-tm-open { overflow: hidden; }
 .talk-to-mira .tm-dialogue-head h1,.talk-to-mira .tm-identity-copy strong{color:var(--tm-theme-text)}
 .talk-to-mira .tm-dialogue-head p,.talk-to-mira .tm-identity-copy small,.talk-to-mira .tm-privacy-note{color:var(--tm-theme-muted)}
 .talk-to-mira .tm-transcript{background-image:linear-gradient(var(--tm-theme-overlay),var(--tm-theme-overlay)),var(--chat-wallpaper,none)}
+.talk-to-mira .tm-transcript{position:relative;isolation:isolate;background-color:transparent;}
+.talk-to-mira .tm-transcript .tm-message,.talk-to-mira .tm-transcript .tm-end-anchor{position:relative;z-index:1}
+.talk-to-mira .tm-transcript .tm-wallpaper-video{z-index:0;border-radius:14px}
 .talk-to-mira .tm-message.from-mira .tm-message-copy{background:var(--tm-theme-bubble);border-color:var(--tm-theme-border);color:var(--tm-theme-text)}
 .talk-to-mira .tm-message.from-you .tm-message-copy{background:var(--tm-theme-outgoing);border-color:var(--tm-theme-border);color:var(--tm-theme-outgoing-text)}
 .talk-to-mira .tm-speaker,.talk-to-mira .tm-message-foot{color:var(--tm-theme-muted)}
