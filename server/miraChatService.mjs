@@ -24,12 +24,9 @@ function readBody(req, limit = 6_000_000) {
   });
 }
 
-export function miraChatPlugin() {
+export function createMiraChatHandler() {
   const rateLimits = new Map();
-  return {
-    name: 'vericove-mira-chat',
-    configureServer(server) {
-      server.middlewares.use('/api/mira-chat', async (req, res) => {
+  return async function handleMiraChatRequest(req, res) {
         if (req.method === 'GET') { json(res, 200, { configured: Boolean(process.env.GEMINI_API_KEY) }); return; }
         if (req.method !== 'POST') {
           res.setHeader('Allow', 'GET, POST');
@@ -88,7 +85,15 @@ export function miraChatPlugin() {
           const message = error.message === 'large' ? 'This conversation is too long to send.' : error.message === 'invalid_attachment' ? 'This attachment could not be prepared. Try a smaller image or a PDF, CSV, text or Markdown file.' : error.message === 'invalid' ? 'A conversation message could not be prepared.' : 'Mira could not connect just now. Please try again.';
           json(res, status, { error: message });
         }
-      });
+  };
+}
+
+export function miraChatPlugin() {
+  const handler = createMiraChatHandler();
+  return {
+    name: 'vericove-mira-chat',
+    configureServer(server) {
+      server.middlewares.use('/api/mira-chat', handler);
     },
   };
 }

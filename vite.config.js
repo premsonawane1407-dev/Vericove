@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 import { autoContentPlugin } from './server/autoContentService.mjs';
 import { miraTtsPlugin } from './server/miraTtsService.mjs';
 import { miraChatPlugin } from './server/miraChatService.mjs';
+import { symptomIntelligencePlugin } from './server/symptomIntelligenceService.mjs';
 
 const previewWithMiddleware = plugin => ({
   ...plugin,
@@ -17,7 +18,8 @@ export default defineConfig(({ mode }) => {
   const autoContent = autoContentPlugin();
   const miraTts = miraTtsPlugin();
   const miraChat = miraChatPlugin();
+  const symptomIntelligence = symptomIntelligencePlugin();
   return {
-    plugins: [previewWithMiddleware(autoContent), previewWithMiddleware(miraTts), previewWithMiddleware(miraChat)],
+    plugins: [previewWithMiddleware(autoContent), previewWithMiddleware(miraTts), previewWithMiddleware(miraChat), previewWithMiddleware(symptomIntelligence)],
   };
 });

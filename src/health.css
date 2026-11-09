@@ -56,6 +56,51 @@
 .summary-ai-status p{margin:6px 0 0;color:#625e66;font-size:13px;line-height:1.55}
 .health-review .health-disclaimer{font-size:13px;line-height:1.55}
 
+/* Optional, consent-led PubMed + Gemini evidence explorer */
+.symptom-research{position:relative;isolation:isolate;overflow:hidden;margin:22px 0 18px;padding:22px;border:1px solid rgba(123,102,132,.18);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(248,244,250,.62));-webkit-backdrop-filter:blur(18px) saturate(1.18);backdrop-filter:blur(18px) saturate(1.18);box-shadow:0 12px 34px rgba(62,43,69,.045),inset 0 1px 0 rgba(255,255,255,.82);animation:research-surface-in .48s cubic-bezier(.2,.75,.25,1) both;}
+.symptom-research::before{position:absolute;z-index:-1;inset:-35% auto auto 42%;width:48%;height:115%;border-radius:50%;background:radial-gradient(ellipse,rgba(233,217,237,.27),transparent 68%);content:"";pointer-events:none;transform:translate3d(0,0,0);animation:research-light-drift 2.8s cubic-bezier(.2,.75,.25,1) both;}
+@keyframes research-surface-in{from{opacity:0;transform:translateY(10px) scale(.992)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes research-light-drift{from{transform:translate3d(-12px,-6px,0) scale(.96)}to{transform:translate3d(16px,8px,0) scale(1.04)}}
+.symptom-research-heading{display:flex;align-items:flex-start;gap:13px}
+.research-icon,.research-source-mark{display:grid;place-items:center;flex:none;width:38px;height:38px;border:1px solid rgba(128,102,139,.15);border-radius:12px;background:rgba(255,255,255,.76);color:#795d84;box-shadow:0 3px 12px rgba(69,48,76,.05)}
+.research-eyebrow{display:block;color:#8a718f;font-size:10px;font-weight:750;letter-spacing:1.35px}
+.symptom-research-heading h3{margin:4px 0;color:#38303d;font-size:18px;letter-spacing:-.3px}
+.symptom-research-heading p{margin:4px 0 0;color:#6b6570;font-size:13px;line-height:1.55}
+.research-consent{display:flex;align-items:flex-start;gap:9px;margin:16px 0 12px;padding:11px 13px;border:1px solid rgba(120,108,129,.12);border-radius:12px;background:rgba(255,255,255,.65);color:#7a7180}
+.research-consent svg{flex:none;margin-top:1px;color:#887391}
+.research-consent p{margin:0;font-size:12px;line-height:1.55}
+.research-start{min-height:44px;border-color:#e2d7e7;background:rgba(255,255,255,.82);color:#624b6c;box-shadow:0 4px 13px rgba(64,42,71,.06),inset 0 1px 0 rgba(255,255,255,.9);transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+.research-start:hover{transform:translateY(-1px);border-color:#bfaec8;box-shadow:0 7px 18px rgba(64,42,71,.1)}
+.research-start:focus-visible,.research-error .btn:focus-visible,.research-source:focus-visible,.research-again:focus-visible{outline:3px solid #b99cc4;outline-offset:3px}
+.research-loading{display:flex;align-items:center;gap:13px;margin-top:18px;padding:18px;border:1px solid rgba(128,102,139,.13);border-radius:14px;background:rgba(255,255,255,.68)}
+.research-spinner{width:21px;height:21px;flex:none;border:2px solid #e4dbe8;border-top-color:#896b92;border-radius:50%;animation:research-spin .8s linear infinite}
+@keyframes research-spin{to{transform:rotate(360deg)}}
+.research-loading strong,.research-loading small{display:block}
+.research-loading strong{color:#514758;font-size:13px}
+.research-loading small{margin-top:3px;color:#817a85;font-size:12px}
+.research-error{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;padding:13px 15px;border:1px solid #ead9d6;border-radius:13px;background:#fff9f7;color:#754e49;font-size:13px;line-height:1.5}
+.research-error .btn{min-height:36px;flex:none}
+.research-results{margin-top:18px;animation:research-in .34s cubic-bezier(.2,.8,.2,1) both}
+@keyframes research-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.research-summary{padding:17px 18px;border:1px solid rgba(129,105,139,.14);border-radius:14px;background:rgba(255,255,255,.78)}
+.research-summary>p{margin:9px 0 0;color:#433c48;font-size:14px;line-height:1.68;overflow-wrap:anywhere}
+.research-summary .research-caveat{display:flex;align-items:flex-start;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid #eee8f0;color:#77707b;font-size:12px}
+.research-caveat svg{flex:none;margin-top:2px;color:#887391}
+.research-sources{margin-top:18px}
+.research-sources h4{display:flex;align-items:center;gap:8px;margin:0 0 9px;color:#524958;font-size:13px}
+.research-sources h4 span{display:grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:20px;background:#f0eaf2;color:#72587e;font-size:11px}
+.research-source{display:flex;align-items:center;gap:12px;min-width:0;margin-top:8px;padding:12px;border:1px solid rgba(120,108,129,.12);border-radius:13px;background:rgba(255,255,255,.76);color:inherit;text-decoration:none;transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+.research-source:hover{transform:translateY(-1px);border-color:#d1c2d7;box-shadow:0 6px 15px rgba(53,39,60,.06)}
+.research-source>span:nth-child(2){flex:1;min-width:0}
+.research-source strong,.research-source small{display:block}
+.research-source strong{color:#493e50;font-size:13px;line-height:1.42;font-weight:650}
+.research-source small{margin-top:4px;color:#817985;font-size:11px;line-height:1.4}
+.research-source>svg{flex:none;color:#8a7890}
+.research-source-mark{width:32px;height:32px;border-radius:10px}
+.research-again{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin-top:12px}
+@media(max-width:700px){.symptom-research{margin:18px 0;padding:17px;border-radius:16px}.symptom-research-heading{gap:10px}.research-icon{width:34px;height:34px}.symptom-research-heading h3{font-size:17px}.symptom-research-heading p{font-size:12px}.research-consent{padding:10px}.research-consent p{font-size:11px}.research-error{align-items:flex-start;flex-direction:column}.research-source{gap:9px;padding:10px}.research-source strong{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.symptom-research,.symptom-research::before,.research-spinner,.research-results{animation:none}.research-start,.research-source{transition:none}}
+
 @media(max-width:700px){
   .conversation-top{min-height:56px;gap:10px;padding-bottom:12px}
   .conversation-identity{gap:9px}
